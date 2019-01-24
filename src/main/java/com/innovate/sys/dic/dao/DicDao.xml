@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE  mapper  PUBLIC  "-//mybatis.org//DTD  Mapper  3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.innovate.sys.dic.dao.DicDao">
+    
+    <!-- 保存用户信息 -->
+    <insert id="saveDic" parameterType="dic">
+    	<selectKey keyProperty="id" resultType="String" order="BEFORE">
+            select replace(uuid(),'-','') from dual 
+        </selectKey>
+    	insert into t_sys_dic(id,name,code,category_id,comments,seq,status,create_time,update_time) 
+    	values(#{id}, #{name},#{code}, #{category.id}, #{comments}, #{seq}, #{status}, #{createTime}, #{updateTime});
+    </insert>
+    
+	<select id="listAllDic"  resultType="dic">
+	<![CDATA[
+		select 
+			d.id as id , 
+			d.name as name, 
+			d.code as code, 
+			d.category_id as 'category.id',
+			c.category_name as 'category.categoryName',
+			d.comments as comments,
+			d.seq as seq,
+			d.update_time as updateTime,
+			d.create_time as createTime
+		from t_sys_dic d , t_sys_category c
+		where d.status = 0 and c.id = d.category_id;
+	]]>
+	</select>
+	<select id="listDicByCondition"  resultType="dic"  parameterType="dic">
+		select 
+			d.id as id , 
+			d.name as name, 
+			d.code as code, 
+			d.category_id as 'category.id',
+			c.category_name as 'category.categoryName',
+			d.comments as comments,
+			d.seq as seq,
+			d.update_time as updateTime,
+			d.create_time as createTime
+		from t_sys_dic d , t_sys_category c
+		where d.status = 0  and c.id = d.category_id
+			<if test="name != null and name !='' ">
+			<!-- 执行效率高一点，只针对msyql -->
+			   AND instr(d.name , #{name})
+			</if>
+			<if test="code != null and code != ''">
+			<!-- 执行效率高一点，只针对msyql -->
+			   AND instr(d.code , #{code})
+			</if>
+			<if test="category != null and category.id != ''">
+			<!-- 执行效率高一点，只针对msyql -->
+			   AND d.category_id = #{category.id}
+			</if>
+			
+		order by d.category_id , d.update_time desc
+	</select>
+	
+	
+	<select id="getDicList"  resultType="dic" parameterType="String">
+	<![CDATA[
+		select 
+			d.id as id , 
+			d.name as name, 
+			d.code as code, 
+			d.category_id as 'category.id',
+			d.comments as comments,
+			d.seq as seq,
+			d.update_time as updateTime,
+			d.create_time as createTime
+		from t_sys_dic d , t_sys_category c
+		where d.status = 0 and c.id = d.category_id and c.category_code = #{categoryCode}
+	]]>
+	</select>
+	
+	
+	<select id="getDicInfo"  resultType="dic" parameterType="String">
+	<![CDATA[
+		select 
+			d.id as id , 
+			d.name as name, 
+			d.code as code, 
+			d.category_id as 'category.id',
+			c.category_name as 'category.categoryName',
+			d.comments as comments,
+			d.seq as seq,
+			d.update_time as updateTime,
+			d.create_time as createTime
+		from t_sys_dic d , t_sys_category c
+		where d.status = 0 and c.id = d.category_id and c.category_code = #{categoryCode} and d.code = #{code};
+	]]>
+	</select>
+	
+	<select id="getDicById"  resultType="dic" parameterType="String">
+	<![CDATA[
+		select 
+			d.id as id , 
+			d.name as name, 
+			d.code as code, 
+			d.category_id as 'category.id',
+			c.category_name as 'category.categoryName',
+			d.comments as comments,
+			d.seq as seq,
+			d.update_time as updateTime,
+			d.create_time as createTime
+		from t_sys_dic d , t_sys_category c
+		where d.id = #{id} and c.id = d.category_id;
+	]]>
+	</select>
+	
+	
+	
+	<delete id="deleteDic" parameterType="String">
+		delete from t_sys_dic where id = #{dicId};
+	</delete>
+	
+	<update id="updateDic" parameterType="dic">
+		update t_sys_dic 
+		<set>
+	      <if test="name != null">name=#{name},</if>
+	      <if test="code != null">code=#{code},</if>
+	      <if test="category != null and category.id !='' ">category_id = #{category.id},</if>
+	      <if test="seq != null">seq=#{seq},</if>
+	      <if test="status != null">status=#{status},</if>
+	      <if test="updateTime != null">update_time=#{updateTime},</if>
+	      <if test="createTime != null">create_time=#{createTime},</if>
+	      <if test="comments != null">comments=#{comments}</if>
+	    </set>
+  		where id=#{id}
+	</update>
+	
+</mapper>

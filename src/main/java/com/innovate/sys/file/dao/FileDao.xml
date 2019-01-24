@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE  mapper  PUBLIC  "-//mybatis.org//DTD  Mapper  3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.innovate.sys.file.dao.FileDao">
+
+    <!-- 保存文件信息 -->
+    <insert id="saveFile" parameterType="uploadFile">
+    	insert into t_sys_file(id,name,ext,type,size,object_id,is_temp,path,create_time,update_time,create_user) 
+    	values(#{id}, #{name},#{ext}, #{type}, #{size}, #{objectId}, #{isTemp}, #{path}, #{createTime}, #{updateTime}, #{createUser});
+    </insert>
+    
+    <!-- 业务更新文件，保存信息 -->
+    <update id="updateRefFileTag">
+    	update t_sys_file
+	    <set>
+	      <if test="isTemp != null">is_temp=#{isTemp},</if>
+	      <if test="objectId != null">object_id=#{objectId}</if>
+	    </set>
+	    <choose>
+	      <when  test="fileId != null and fileId !=''">
+			  where id in
+			  <foreach item="item" index="index" collection="fileId"
+			      open="(" separator="," close=")">
+			        #{item}
+	          </foreach>
+          </when>
+          <otherwise> where 1=2 </otherwise>
+          </choose>
+    </update>
+    
+    <!-- 删除文件信息-->
+    <update id="deleteRefFile">
+    	delete from t_sys_file
+    	<choose>
+    		<when  test="objectId != null and objectId !=''">
+    			where  object_id=#{objectId} 
+    			<if test="fileId != null and fileId != '' ">
+    			    and id not in 
+	    			<foreach item="item" index="index" collection="fileId"
+					      open="(" separator="," close=")">
+					        #{item}
+			          </foreach>
+		          </if>
+    		</when>
+    		<otherwise>
+    			where 1=2
+    		</otherwise>
+    	</choose>
+    </update>
+    
+    
+    
+    
+</mapper>

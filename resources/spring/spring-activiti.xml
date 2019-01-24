@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+    		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd"
+	default-lazy-init="false">
+
+	<!-- ProcessEngineConfiguration processEngineConfiguration = ProcessEngineConfiguration.createStandaloneProcessEngineConfiguration(); 
+		//连接数据库的配置 processEngineConfiguration.setJdbcDriver("com.mysql.jdbc.Driver"); 
+		processEngineConfiguration.setJdbcUrl("jdbc:mysql://localhost:3306/itcast0711activiti?useUnicode=true&characterEncoding=utf8"); 
+		processEngineConfiguration.setJdbcUsername("root"); processEngineConfiguration.setJdbcPassword("root"); 
+		/** public static final String DB_SCHEMA_UPDATE_FALSE = "false";不能自动创建表，需要表存在 
+		public static final String DB_SCHEMA_UPDATE_CREATE_DROP = "create-drop";先删除表再创建表 
+		public static final String DB_SCHEMA_UPDATE_TRUE = "true";如果表不存在，自动创建表 */ 
+		processEngineConfiguration.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE); -->
+	<!-- activiti begin -->
+	<!-- 配置流程引擎配置类 注意：这是用 org.activiti.spring.SpringProcessEngineConfiguration 
+		这个类 -->
+	<bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
+		<property name="dataSource" ref="dataSource" />
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="databaseSchemaUpdate" value="false" />
+		<!-- <property name="jobExecutorActivate" value="false" /> -->
+		<property name="createDiagramOnDeploy" value="false" /> <!-- 是否生成流程定义图片 -->
+		<!-- 生成流程图的字体不设置会乱码 -->
+		<property name="activityFontName" value="宋体" />
+		<property name="labelFontName" value="宋体" />
+	</bean>
+
+	<!-- 配置流程引擎工厂 -->
+	<bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
+		<property name="processEngineConfiguration" ref="processEngineConfiguration" />
+	</bean>
+
+	<!-- 配置注入一些服务 -->
+	<bean id="repositoryService" factory-bean="processEngine"
+		factory-method="getRepositoryService" />
+	<bean id="runtimeService" factory-bean="processEngine"
+		factory-method="getRuntimeService" />
+	<bean id="taskService" factory-bean="processEngine"
+		factory-method="getTaskService" />
+	<bean id="historyService" factory-bean="processEngine"
+		factory-method="getHistoryService" />
+	<bean id="managementService" factory-bean="processEngine"
+		factory-method="getManagementService" />
+	<!-- activiti end -->
+
+</beans>

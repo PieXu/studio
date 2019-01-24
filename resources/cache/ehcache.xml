@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<ehcache updateCheck="false" name="txswx-ehcache">  
+    <diskStore path="java.io.tmpdir"/>  
+    <!-- DefaultCache setting. -->  
+    <defaultCache maxEntriesLocalHeap="10000" eternal="true" timeToIdleSeconds="300" timeToLiveSeconds="600"  
+               overflowToDisk="true" maxEntriesLocalDisk="100000" diskPersistent="true"/> 
+                   
+    <cache name="com.innovate.sys.service.impl.DicServiceImpl" eternal="false" maxElementsInMemory="100"
+       overflowToDisk="true" diskPersistent="true" timeToIdleSeconds="0" timeToLiveSeconds="300" memoryStoreEvictionPolicy="LRU" />
+       
+    <cache name="sys.service.ResourceServiceImpl" eternal="false" maxElementsInMemory="100"
+       overflowToDisk="true" diskPersistent="true" timeToIdleSeconds="0" timeToLiveSeconds="300" memoryStoreEvictionPolicy="LRU" />
+    <cache name="code-cache"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>  
+</ehcache>  

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE  mapper  PUBLIC  "-//mybatis.org//DTD  Mapper  3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.innovate.sys.dic.dao.DicCategoryDao">
+    
+    <!-- 保存用户信息 -->
+    <insert id="saveDicCategory" parameterType="dicCategory">
+    	<selectKey keyProperty="id" resultType="String" order="BEFORE">
+            select replace(uuid(),'-','') from dual 
+        </selectKey>
+    	insert into t_sys_category(id,category_name,category_code,category_type,status,create_time,update_time) 
+    	values(#{id}, #{categoryName},#{categoryCode}, #{categoryType}, #{status}, #{createTime}, #{updateTime});
+    </insert>
+
+	<select id="pageDicCategory"  resultType="dicCategory"  parameterType="dicCategory">
+		select 
+			id as id , 
+			category_name as categoryName, 
+			category_type as categoryType, 
+			category_code as categoryCode,
+			update_time as updateTime,
+			create_time as createTime
+		from t_sys_category 
+		where status = 0
+			<if test="categoryName != null and categoryName !='' ">
+			   AND instr(category_name , #{categoryName})
+			</if>
+			<if test="categoryType != null and categoryType != ''">
+			   AND instr(category_type , #{categoryType})
+			</if>
+			<if test="categoryCode != null and categoryCode != ''">
+			   AND instr(category_code,#{categoryCode})
+			</if>
+	</select>
+	
+	<!-- find by id -->
+	<select id="getById"  resultType="dicCategory" parameterType="String">
+	<![CDATA[
+		select 
+			id as id , 
+			category_name as categoryName, 
+			category_type as categoryType, 
+			category_code as categoryCode,
+			status as status,
+			update_time as updateTime,
+			create_time as createTime
+		from t_sys_category 
+		where id = #{id};
+	]]>
+	</select>
+	
+	<!-- update -->
+	<update id="updateDicCategory" parameterType="dicCategory">
+		update t_sys_category 
+		<set>
+	      <if test="categoryName != null">category_name=#{categoryName},</if>
+	      <if test="categoryCode != null">category_code=#{categoryCode},</if>
+	      <if test="categoryType != null">category_type=#{categoryType},</if>
+	      <if test="status != null">status=#{status},</if>
+	      <if test="updateTime != null">update_time=#{updateTime},</if>
+	      <if test="createTime != null">create_time=#{createTime},</if>
+	    </set>
+  		where id=#{id}
+	</update>
+	
+	<select id="listCategoryAll"  resultType="dicCategory" >
+		select 
+			id as id , 
+			category_name as categoryName, 
+			category_type as categoryType, 
+			category_code as categoryCode,
+			update_time as updateTime,
+			create_time as createTime
+		from t_sys_category 
+		where status = 0
+	</select>
+	
+	
+</mapper>

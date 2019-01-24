@@ -1,0 +1,28 @@
+.pageDiv .pageClassDisable {
+	text-decoration: none;
+	cursor: pointer;
+	margin-left: 10px;
+	color: #B0B0B0
+}
+
+.pageDiv .pageClass {
+	text-decoration: none;
+	cursor: pointer;
+	margin-left: 10px;
+}
+
+.pageDiv .pageGO {
+	text-decoration: none;
+	cursor: pointer;
+	margin-left: 10px;
+}
+
+.pagespan input {
+	width: 30px;
+	height: 20px;
+	border: 1px solid #B0B0B0
+}
+
+.pageDiv .pageSpan {
+	margin-left: 10px;
+}

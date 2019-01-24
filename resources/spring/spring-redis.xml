@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+    		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd"
+	default-lazy-init="false">
+		
+	<!-- 配置JedisPoolConfig实例 -->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxIdle" value="${redis.maxIdle}" />
+		<property name="maxTotal" value="${redis.maxActive}" />
+		<property name="maxWaitMillis" value="${redis.maxWait}" />
+		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
+	</bean>
+
+	<!-- redis 配置,也可以把配置挪到properties配置文件中,再读取 
+		这种 arguments 构造的方式，之前配置有缺点。
+		这里之前的配置有问题，因为参数类型不一致，有时候jar和环境的问题，导致参数根据index对应，会处理问题，
+		理论上加另一个 name，就可以解决，现在把name 和type都加上，更保险。
+	 -->
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+		<constructor-arg index="0" ref="jedisPoolConfig" />
+	    <constructor-arg index="1" value="${redis.host}" name="host" type="java.lang.String"/>
+	    <constructor-arg index="2" value="${redis.port}"  name="port" type="int"/>
+	    <constructor-arg index="3" value="${redis.timeout}"  name="timeout" type="int"/>
+       <!--  <constructor-arg index="4" value="${redis.password}" name="password" type="java.lang.String"/> -->
+	</bean>
+	
+	<!-- redis 管理Manager -->
+	<bean id="jedisManager" class="com.innovate.core.cache.JedisManager">
+	    <property name="jedisPool" ref="jedisPool"/>
+	</bean>
+	
+	
+	<!-- 配置JedisConnectionFactory -->
+	<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<property name="hostName" value="${redis.host}"/>
+		<property name="port" value="${redis.port}"/>
+		<property name="password" value="${redis.password}"/>
+		<property name="database" value="${redis.dbIndex}"/>
+		<property name="poolConfig" ref="jedisPoolConfig"/>
+	</bean>
+	
+	<bean id="stringRedisSerializer"  class="org.springframework.data.redis.serializer.StringRedisSerializer" />  
+	<bean id="jdkRedisSerializer"  class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />  
+	<!-- redisTemplate配置，redisTemplate是对Jedis的对redis操作的扩展，有更多的操作，封装使操作更便捷  -->
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+		p:connection-factory-ref="jedisConnectionFactory" 
+		p:keySerializer-ref="stringRedisSerializer"   
+		p:valueSerializer-ref="jdkRedisSerializer"
+        p:hashKeySerializer-ref="stringRedisSerializer"
+      /> 
+	<!-- 配置RedisCacheManager -->
+	<bean id="redisCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
+	     <constructor-arg name="redisOperations" ref="redisTemplate" />
+		 <property name="defaultExpiration" value="3000"/>
+	</bean>
+ 	<!-- 静态注入，ref后面的 redisTemplate 的名称必须和 前面的  bean id="redisTemplate" 中的名称一致，name="redisTemplate"中的名称和RedisUtil类中静态变量的名称一致-->
+	<bean name="redisUtils" class="com.innovate.cache.RedisUtils">
+	    <property name="redisTemplate" ref="redisTemplate"/>
+	</bean>
+	
+	
+	
+</beans>
