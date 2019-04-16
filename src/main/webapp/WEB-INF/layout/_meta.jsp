@@ -31,7 +31,5 @@
 <script type="text/javascript" src="lib/socket/sockjs.min.js"></script>  
 <script type="text/javascript" src="lib/socket/stomp.js"></script>  
 
-<!-- 通用js -->
-<script type="text/javascript" src="js/common/common.js"></script> 
 <!-- 分页 -->
 <link href="css/page.css" rel="stylesheet" />

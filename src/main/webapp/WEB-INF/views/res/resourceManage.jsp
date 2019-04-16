@@ -3,7 +3,6 @@
 <%@taglib prefix="page" uri="http://com.innovate.page.tld" %>
 <link rel="stylesheet" href="lib/jquery-treetable-3.2.0/css/jquery.treetable.css" type="text/css">
 <link rel="stylesheet" href="lib/jquery-treetable-3.2.0/css/jquery.treetable.theme.default.css" type="text/css">
-	<div class="Hui-article">
 		<article class="cl pd-5 pl-50">
 			<table class="table table-border table-bordered table-bg table-hover table-sort" id="example-tabletree">
 			<thead>
@@ -54,7 +53,6 @@
 			</tbody>
 		</table>
 	</article>
-</div>
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="lib/jquery-treetable-3.2.0/jquery.treetable.js"></script> 
 <script type="text/javascript">

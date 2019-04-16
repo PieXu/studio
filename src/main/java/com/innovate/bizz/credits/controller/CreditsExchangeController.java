@@ -45,7 +45,7 @@ public class CreditsExchangeController extends BaseController{
 		model.addAttribute("page",page);
 		model.addAttribute("exchange", exchange);
 		model.addAttribute("exchangeStatus", exchangeStatus);
-		return "credits/list/exchangeList";
+		return "credits.exchangeList";
 	}
 	
 	/**

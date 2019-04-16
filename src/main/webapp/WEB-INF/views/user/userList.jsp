@@ -2,9 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://com.innovate.page.tld" prefix="page"%>
-	<div class="Hui-article">
 		<article class="cl pd-20">
-		<form action="user/userList.do" method="post" id="user_list_form" >
 			<div class="docs-queryfiled">
 				姓名：<input type="text" id="userName" name="userName" value="${user.userName }" class="input-text radius" placeholder="用户姓名" style="width:120px;">
 				&nbsp;&nbsp;
@@ -34,13 +32,12 @@
 					</select>
 				</span> 
 				&nbsp;&nbsp;
-				<button class="btn btn-primary radius" type="submit">查 询</button>
-				<button class="btn btn-success radius" type="button" onclick="clearSerachForm('user_list_form')">清 空</button>
+				<button class="btn btn-primary radius" type="button" onclick="commonQuery(true)">查 询</button>
+				<button class="btn btn-success radius" type="button" onclick="resetSerachForm()">清 空</button>
 			</div>
-			</form>
 			<div class="mt-30">
-				<%-- <page:showOpt code="add" title="新增" type="button" method="editUser('');" /> --%>
-				<page:optArea />
+				<page:showOpt code="add" title="新增" type="button" method="editUser('');" />
+				<%-- <page:optArea /> --%>
 			</div>
 			<div class="mt-10">
 				<table class="table table-border table-bordered table-bg table-hover table-sort">
@@ -63,7 +60,7 @@
 						<tr class="text-l">
 							<!-- <td><input type="checkbox" value="" name=""></td> -->
 							<td>${status.index+1 }</td>
-							<td class="text-l"><u style="cursor:pointer" class="text-primary" onClick="article_edit('查看','article-zhang.html','10001')" title="查看">${user.userName }</u></td>
+							<td class="text-l">${user.userName }</td>
 							<td>${user.loginName }</td>
 							<td><page:idToName dicId="${user.userType }"/> </td>
 							<td><page:idToName dicId="${user.gender }"/></td>
@@ -91,11 +88,9 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				 <page:page formId="user_list_form" page="${page}" />  
+				<page:page formId="list_query_form" page="${page}" ajaxType="true" /> 
 			</div>
 		</article>
-	</div>
-</section>
 <script type="text/javascript">
 /*添加*/
 function editUser(id){
@@ -136,7 +131,7 @@ function delUser(id){
 				 //var data = $.parseJSON( data );
 				if( data.result == "success"){
 					layer.msg(data.message,{icon:1,time:1000});
-					$('#user_list_form').submit();
+					commonQuery();
 				}else{
 					layer.msg(data.message,{icon:1,time:1000});
 				}
@@ -193,7 +188,7 @@ function changeUserStatus(id,status){
 			 // var data = $.parseJSON( data );
 			if( data.result == "success"){
 				layer.msg(data.message,{icon:1,time:1000});
-				$('#user_list_form').submit();
+				commonQuery();
 			}else{
 				layer.msg(data.message,{icon:1,time:1000});
 			}

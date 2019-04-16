@@ -1,13 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="page" uri="http://com.innovate.page.tld" %>
-	<div class="Hui-article">
 		<article class="cl pd-10">
 			<div class="mt-10">
 				<a class="btn btn-primary radius" data-title="新增" onclick="editOpt('');" href="javascript:;">新增</a>
 				<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius" data-title="批量删除">批量删除</a>
 			</div>
-			<form action="opt/optList.do" method="post" class="form form-horizontal" id="form-opt">
 				<div class="row cl">
 					<div class="formControls col-xs-12 col-sm-11">
 						<dl class="permission-list">
@@ -34,9 +32,7 @@
 						</dl>
 					</div>
 				</div>
-			</form>
 		</article>
-	</div>
 <script type="text/javascript">
 
 /*编辑 新增*/

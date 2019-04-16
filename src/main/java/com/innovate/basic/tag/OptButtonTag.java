@@ -12,6 +12,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
+import com.innovate.sys.resource.model.Opt;
 import com.innovate.user.user.model.User;
 import com.innovate.util.CommonCons;
 import com.innovate.util.LoggerUtils;
@@ -61,14 +62,14 @@ public class OptButtonTag extends BodyTagSupport {
 		StringBuilder builder = new StringBuilder();
 		User loginUser = (User) SecurityUtils.getSubject().getPrincipal();
 		// 超级管理员的权限的输出按钮的操作
-		if(CommonCons.Y_N_ENUM.Y.toString().equals(loginUser.getIsSuperUser())){
-			List<String> currentResOptList = getCurrentResOptList();
+//		if(CommonCons.Y_N_ENUM.Y.toString().equals(loginUser.getIsSuperUser())){
+			List<Opt> currentResOptList = getCurrentResOptList();
 			if(null!=currentResOptList){
-				for(String opt : currentResOptList){
+				for(Opt opt : currentResOptList){
 					builder.append("<input type=\"button\"")
-					   .append("value=\"").append(opt).append("\"")
-					   .append("id=\"").append(opt).append("_opt_id\"")
-					   .append("title=\"").append(opt).append("\"");
+					   .append("value=\"").append(opt.getName()).append("\"")
+					   .append("id=\"").append(opt.getName()).append("_opt_id\"")
+					   .append("title=\"").append(opt.getName()).append("\"");
 					if(StringUtils.isNotBlank(styleClass)){
 						builder.append(" class=\"").append(styleClass).append("\"");
 					}else{
@@ -77,8 +78,8 @@ public class OptButtonTag extends BodyTagSupport {
 					builder.append(" />&nbsp;");
 				}
 			}
-		}else{ // 角色用户的操作按钮
-		}
+//		}else{ // 角色用户的操作按钮
+//		}
 		return builder.toString();
 	}
 
@@ -91,12 +92,12 @@ public class OptButtonTag extends BodyTagSupport {
 		User loginUser = (User) SecurityUtils.getSubject().getPrincipal();
 		// 超级管理员的权限的输出按钮的操作
 		if(CommonCons.Y_N_ENUM.Y.toString().equals(loginUser.getIsSuperUser())){
-			List<String> currentResOptList = getCurrentResOptList();
+			List<Opt> currentResOptList = getCurrentResOptList();
 			if(null!=currentResOptList){
-				for(String opt : currentResOptList){
+				for(Opt opt : currentResOptList){
 					builder.append("<a style=\"text-decoration:none\" class=\"ml-5\" href=\"javascript:;\" ")
-					   .append("value=\"").append(opt).append("\"_opt_id")
-					   .append("title=\"").append(opt).append("\"");
+					   .append("value=\"").append(opt.getName()).append("\"_opt_id")
+					   .append("title=\"").append(opt.getName()).append("\"");
 					if(StringUtils.isNotBlank(styleClass)){
 						builder.append(" class=\"").append(styleClass).append("\"");
 					}else{
@@ -106,7 +107,7 @@ public class OptButtonTag extends BodyTagSupport {
 					if(StringUtils.isNotBlank(iconfont)){
 						builder.append("<i class=\"Hui-iconfont\">").append(iconfont).append("</i>");
 					}else{
-						builder.append(opt);
+						builder.append(opt.getName());
 					}
 					builder.append("</a>");
 				}
@@ -126,10 +127,10 @@ public class OptButtonTag extends BodyTagSupport {
 		Subject currentUser = SecurityUtils.getSubject();
 		Session session = currentUser.getSession();
 		if(null!=session){
-			 Map<String,List<String>> menuOptMap  = (Map<String, List<String>>) session.getAttribute("_menuOptMap");
+			 Map<String,List<Opt>> menuOptMap  = (Map<String, List<Opt>>) session.getAttribute("_menuOptMap");
 			 if(null!= menuOptMap && !menuOptMap.isEmpty()){
 				 String currentMenu = (String) session.getAttribute("_currentMenu");
-				 List<String> strList = menuOptMap.get(currentMenu);
+				 List<Opt> strList = menuOptMap.get(currentMenu);
 				 if(null!= strList && !strList.isEmpty()){
 					 return strList.contains(code);
 				 }
@@ -143,9 +144,9 @@ public class OptButtonTag extends BodyTagSupport {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	private  List<String> getCurrentResOptList()
+	private  List<Opt> getCurrentResOptList()
 	{
-	    Map<String,List<String>> sessionAttribute = (Map<String, List<String>>) SessionUtils.getSessionAttribute("_menuOptMap");
+	    Map<String,List<Opt>> sessionAttribute = (Map<String, List<Opt>>) SessionUtils.getSessionAttribute("_menuOptMap");
 		Subject currentUser = SecurityUtils.getSubject();
 		Session session = currentUser.getSession();
 		if(null!=sessionAttribute){

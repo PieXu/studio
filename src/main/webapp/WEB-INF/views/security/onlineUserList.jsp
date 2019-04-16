@@ -2,10 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://com.innovate.page.tld" prefix="page"%>
-<div class="Hui-article">
 	<article class="cl pd-20">
 		<div class="mt-10">
-			<form action="security/onLineUser.do" method="post" class="form form-horizontal" id="form-onlineuser">
 			<table class="table table-border table-bordered table-bg table-hover table-sort">
 				<thead>
 					<tr class="text-c">
@@ -34,10 +32,8 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			</form>
 		</div>
 	</article>
-</div>
 <script type="text/javascript">
 /**
  * 踢出

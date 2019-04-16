@@ -45,7 +45,7 @@ public class LogController extends BaseController{
 		Page<VisitLog> page = logService.pageVisitLog(log);
 		model.addAttribute("page",page);
 		model.addAttribute("log",log);
-		return "log/list/visitLogList";
+		return "log/visitLogList";
 	}
 	
 	/**
@@ -65,7 +65,7 @@ public class LogController extends BaseController{
 		Page<AuditLog> page = auditLogService.pageAuditLog(log);
 		model.addAttribute("page",page);
 		model.addAttribute("log",log);
-		return "log/list/auditLogList";
+		return "log/auditLogList";
 	}
 	
 }

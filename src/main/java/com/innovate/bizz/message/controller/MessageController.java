@@ -54,7 +54,7 @@ public class MessageController extends BaseController{
 		model.addAttribute("page",page);
 		model.addAttribute("message", message);
 		model.addAttribute("messageType", messageType);
-		return "message/list/messageList";
+		return "message/messageList";
 	}
 	
 	/**

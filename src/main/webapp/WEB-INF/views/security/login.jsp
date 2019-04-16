@@ -53,11 +53,11 @@ $(function(){
 				</div>
 				<p class="u_input">
 					<span class="u_logo"></span>         
-					<input class="ipt" type="text" id="loginName" name="loginName" placeholder="请输入用户名或邮箱" value="${user.loginName }"> 
+					<input class="ipt" type="text" id="loginName" name="loginName" autocomplete="off" placeholder="请输入用户名或邮箱" value="${user.loginName }"> 
 			    </p>
 				<p style="position: relative;">
 					<span class="p_logo"></span>         
-					<input class="ipt" id="password" name="password" type="password" placeholder="请输入密码" value="">   
+					<input class="ipt" id="password" name="password" type="password"  autocomplete="off"  placeholder="请输入密码" value="">   
 			    </p>
 				<div class="btn_div">
 					<p>
@@ -75,7 +75,7 @@ $(function(){
 		<a style="color:#666;" href="javascript:void(0)">CopyRight @IvanHsu&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;技术支持：（QQ）3582941697 </a>
 	</div>
 <script type="text/javascript">
-//登录操作
+$(document).ready(function(){
    $('#login').click(function(){
        var username = $('#loginName').val();
        var password = $('#password').val();
@@ -98,7 +98,7 @@ $(function(){
 		   data: $("#loginForm").serialize() ,
 		   success: function(data){
 			  // //data = $.parseJSON( data );
-			   if( data.result == "success"){
+			   if(data.result == "success"){
 				   window.location.href= "main.do";
 			   }else{
 				   layer.close(load);
@@ -107,6 +107,7 @@ $(function(){
 		   }
 	  });
    });
+});
 </script>
 </body>
 </html>

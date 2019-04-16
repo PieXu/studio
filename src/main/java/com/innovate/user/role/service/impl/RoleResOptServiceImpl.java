@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.innovate.sys.resource.model.Opt;
 import com.innovate.user.role.dao.RoleResOptDao;
 import com.innovate.user.role.model.RoleResOpt;
 import com.innovate.user.role.service.IRoleResOptService;
@@ -59,17 +60,17 @@ public class RoleResOptServiceImpl implements IRoleResOptService{
 	 * roleIdList
 	 */
 	@Override
-	public List<String> getOptCode(String resId, List<String> roleIdList) {
+	public List<Opt> getOptsByResRole(String resId, List<String> roleIdList) {
 		if(StringUtils.isNotBlank(resId) && null!=roleIdList && roleIdList.size()>0){
-			return roleResOptDao.getOptCode(resId,roleIdList);
+			return roleResOptDao.getOptsByResRole(resId,roleIdList);
 		}
 		return null;
 	}
 
 	@Override
-	public List<String> getOptCodeByRes(String resId) {
+	public List<Opt> getOptsByRes(String resId) {
 		if(StringUtils.isNotBlank(resId)){
-			return roleResOptDao.getOptCodeByRes(resId);
+			return roleResOptDao.getOptsByRes(resId);
 		}
 		return null;
 	}

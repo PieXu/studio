@@ -55,7 +55,7 @@ public class RoleController extends BaseController{
 		Page<Role> page = roleService.pageRole(role);;
 		model.addAttribute("page",page);
 		model.addAttribute("role", role);
-		return "role/list/roleList";
+		return "role/roleList";
 	}
 	
 	/**

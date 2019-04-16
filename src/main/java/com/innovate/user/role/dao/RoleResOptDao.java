@@ -50,8 +50,8 @@ public interface RoleResOptDao {
 	 * @return
 	 */
 	@Lang(SimpleInLangDriver.class)
-	@Select("select code from " + Opt.TAB_NAME +" where id in (select distinct opt_id from "+RoleResOpt.TAB_NAME+" where res_id =#{resId} and role_id in (#{roleIdList}))")
-	public List<String> getOptCode(@Param("resId")String resId, @Param("roleIdList")List<String> roleIdList);
+	@Select("select * from " + Opt.TAB_NAME +" where id in (select distinct opt_id from "+RoleResOpt.TAB_NAME+" where res_id =#{resId} and role_id in (#{roleIdList}))")
+	public List<Opt> getOptsByResRole(@Param("resId")String resId, @Param("roleIdList")List<String> roleIdList);
 
 	/**
 	 * 
@@ -59,7 +59,7 @@ public interface RoleResOptDao {
 	 * @return
 	 */
 	@Lang(SimpleInLangDriver.class)
-	@Select("select code from " + Opt.TAB_NAME +" where id in (select distinct opt_id from "+RoleResOpt.TAB_NAME+" where res_id =#{resId})")
-	public List<String> getOptCodeByRes(String resId);
+	@Select("select * from " + Opt.TAB_NAME +" where id in (select distinct opt_id from "+RoleResOpt.TAB_NAME+" where res_id =#{resId})")
+	public List<Opt> getOptsByRes(String resId);
 
 }

@@ -41,7 +41,7 @@ public class OptController extends BaseController{
 	{
 		List<Opt> optList = resOptService.getAllOpt();
 		model.addAttribute("optList", optList);
-		return "opt/opt/optList";
+		return "opt/optList";
 	}
 	
 	/**

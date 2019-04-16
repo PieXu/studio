@@ -52,7 +52,7 @@ public class CreditsController extends BaseController{
 		Page<CreditsProduct> page = creditsService.listCreditsProduct(credits);
 		model.addAttribute("page",page);
 		model.addAttribute("credits", credits);
-		return "credits/list/creditsList";
+		return "credits.creditsList";
 	}
 	
 	/**

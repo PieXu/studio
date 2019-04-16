@@ -48,7 +48,7 @@ public class DicController {
 		Page<DicCategory> page = dicCategoryService.pageDicCategory(dicCateogry);
 		model.addAttribute("page",page);
 		model.addAttribute("dicCateogry", dicCateogry);
-		return "dic/list/dicCategoryList";
+		return "dic/dicCategoryList";
 	}
 	
 	/**
@@ -116,7 +116,7 @@ public class DicController {
 		model.addAttribute("dicList",Page);
 		model.addAttribute("dic", dic);
 		model.addAttribute("categoryList", dicCategoryService.listCategoryAll());
-		return "dic/list/dicList";
+		return "dic/dicList";
 	}
 	
 	

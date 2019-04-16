@@ -2,9 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://com.innovate.page.tld" prefix="page"%>
-	<div class="Hui-article">
 		<article class="cl pd-20">
-		<form action="dic/dicList.do" method="post" id="dic_list_form" >
 			<div class="docs-queryfiled">
 				名称：<input type="text" id="name" name="name" value="${dic.name }" class="input-text radius" placeholder="字典名称" style="width:180px;">
 				&nbsp;&nbsp;
@@ -22,11 +20,10 @@
 					</select>
 				</span> 
 				&nbsp;&nbsp;
-				<button class="btn btn-primary radius" type="submit">查 询</button>
-				<button class="btn btn-success radius" type="button" onclick="clearSerachForm('dic_list_form')">清 空</button>
+				<button class="btn btn-primary radius" type="button" onclick="commonQuery(true)">查 询</button>
+				<button class="btn btn-success radius" type="button" onclick="resetSerachForm()">清 空</button>
 			</div>
-		</form>
-			<div class="text-l ">
+			<div class="mt-30">
 				<a class="btn btn-primary radius" data-title="新增" _href="article-add.html" onclick="edit('');" href="javascript:;">新增</a>
 				<a href="javascript:void(0);" onclick="datadel()" class="btn btn-danger radius" data-title="删除">删除</a>
 			</div>
@@ -62,9 +59,8 @@
 						</c:forEach>
 					</tbody>
 				</table>
-		              <page:page formId="dic_list_form" page="${dicList}" />  
+         		<page:page formId="list_query_form" page="${dicList}" ajaxType="true" /> 
 		</article>
-	</div>
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript">
 /*添加*/

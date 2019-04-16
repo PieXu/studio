@@ -6,48 +6,43 @@
  	-->
  	
  	<!-- 主页面模板 -->
-    <definition name="main" template="/WEB-INF/template/template_main.jsp">
-        <put-attribute name="title" value="管理平台" />
+    <definition name="default_main" template="/WEB-INF/template/template_main.jsp">
         <put-attribute name="meta" value="/WEB-INF/layout/_meta.jsp" /> 
         <put-attribute name="header" value="/WEB-INF/layout/_header.jsp" />
-        <!-- <put-attribute name="menu" value="/WEB-INF/layout/_menu.jsp" /> -->
         <put-attribute name="body" value="/WEB-INF/views/security/main.jsp"/>
         <put-attribute name="footer" value="/WEB-INF/layout/_footer.jsp" />
     </definition>
     
     <!-- 错误模板 -->
     <definition name="error" template="/WEB-INF/template/template_main.jsp">
-        <put-attribute name="title" value="管理平台" />
         <put-attribute name="meta" value="/WEB-INF/layout/_meta.jsp" /> 
         <put-attribute name="header" value="/WEB-INF/layout/_header.jsp" />
         <put-attribute name="body" value="/WEB-INF/views/exp/error.jsp"/>
         <put-attribute name="footer" value="/WEB-INF/layout/_footer.jsp" />
     </definition>
  	
-    <!-- 列表页面 -->
-    <definition name="*/list/*" template="/WEB-INF/template/template_default.jsp">
+    <!-- 套用模板的列表页面路径访问 -->
+    <definition name="default_list" template="/WEB-INF/template/template_default.jsp">
         <put-attribute name="title" value="管理平台" />
         <put-attribute name="meta" value="/WEB-INF/layout/_meta.jsp" /> 
         <put-attribute name="header" value="/WEB-INF/layout/_header.jsp" />
         <put-attribute name="menu" value="/WEB-INF/layout/_menu.jsp" />
-        <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
         <put-attribute name="footer" value="/WEB-INF/layout/_footer.jsp" />
     </definition>
     
     <!-- 无菜单模板的页面 -->
     <definition name="*/nsm/*" template="/WEB-INF/template/template_nsm.jsp">
-        <put-attribute name="title" value="管理平台" />
         <put-attribute name="meta" value="/WEB-INF/layout/_meta.jsp" /> 
         <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
         <put-attribute name="footer" value="/WEB-INF/layout/_footer.jsp" />
     </definition>
     
-    <!-- 原本页面的调用 -->
+    <!-- 原本页面的调用，如登录页面等 
     <definition name="*/empty/*" template="/WEB-INF/template/template_empty.jsp">
         <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
-    </definition>
+    </definition>-->
     
-    <!-- 编辑页面 -->
+    <!-- 编辑页面
     <definition name="*/edit/*" template="/WEB-INF/template/template_default.jsp">
         <put-attribute name="title" value="管理平台" />
         <put-attribute name="meta" value="/WEB-INF/layout/_meta.jsp" /> 
@@ -56,8 +51,8 @@
         <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
         <put-attribute name="footer" value="/WEB-INF/layout/_footer.jsp" />
     </definition>
-    
-    <!-- 查看页面 -->
+     -->
+    <!-- 查看页面
     <definition name="*/view/*" template="/WEB-INF/template/template_default.jsp">
         <put-attribute name="title" value="管理平台" />
         <put-attribute name="meta" value="/WEB-INF/layout/_meta.jsp" /> 
@@ -65,9 +60,9 @@
         <put-attribute name="menu" value="/WEB-INF/layout/_menu.jsp" />
         <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
         <put-attribute name="footer" value="/WEB-INF/layout/_footer.jsp" />
-    </definition>
+    </definition> -->
     
-    <!-- 三级页面的模板 -->
+    <!-- 三级页面的模板
     <definition name="*/*/*" template="/WEB-INF/template/template_default.jsp">
         <put-attribute name="title" value="管理平台" />
         <put-attribute name="meta" value="/WEB-INF/layout/_meta.jsp" /> 
@@ -75,14 +70,14 @@
         <put-attribute name="menu" value="/WEB-INF/layout/_menu.jsp" />
         <put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
         <put-attribute name="footer" value="/WEB-INF/layout/_footer.jsp" />
-    </definition>
+    </definition> -->
     
     
-    <!-- 前端网站展示页面 -->
+    <!-- 前端网站展示页面 
     <definition name="*" template="/WEB-INF/template/template_jiujiubujian.jsp">
         <put-attribute name="header" value="/WEB-INF/jiujiubujian/layout/www_header.jsp" />
         <put-attribute name="body" value="/WEB-INF/jiujiubujian/jsp/{1}.jsp"/>
         <put-attribute name="footer" value="/WEB-INF/jiujiubujian/layout/www_footer.jsp" />
-    </definition>
+    </definition>-->
 
 </tiles-definitions>

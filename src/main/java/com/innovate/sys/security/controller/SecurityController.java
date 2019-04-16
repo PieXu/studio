@@ -16,6 +16,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -57,7 +58,7 @@ public class SecurityController extends BaseController{
 	 * @throws IOException 
 	 */
 	@RequestMapping("security/loadMenu")
-	public String loadMenu(HttpServletRequest request,HttpServletResponse response,String resId) throws IOException
+	public String loadMenu(ModelMap model,HttpServletRequest request,HttpServletResponse response,String resId) throws IOException
 	{
 		if(StringUtils.isNotBlank(resId)){
 			Resource res = resService.getResourceById(resId);
@@ -69,7 +70,8 @@ public class SecurityController extends BaseController{
 				pathStr = navstationPath(res,pathStr);
 				session.setAttribute("_navstation_path", pathStr);
 				if(StringUtils.isNotBlank(res.getLink())){
-					return  "redirect:/" + res.getLink();
+					session.setAttribute("_redirect_link", res.getLink());
+					return "default_list";
 				}
 			}
 		}
@@ -215,7 +217,7 @@ public class SecurityController extends BaseController{
 	{
 		List<? extends Object> onlineUser = securityService.loadAllOnlineUser();
 		model.addAttribute("onlineUser",onlineUser);
-		return "security/list/onlineUserList";
+		return "security/onlineUserList";
 	}
 	
 	

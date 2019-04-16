@@ -2,9 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://com.innovate.page.tld" prefix="page"%>
-	<div class="Hui-article">
 		<article class="cl pd-20">
-			<form action="role/roleList.do" method="post" id="role_list_form" >
 				<div class="docs-queryfiled">
 					角色名称：<input type="text" id="name" name="name" value="${role.name }" class="input-text radius" placeholder="角色名称" style="width:120px;">
 					&nbsp;&nbsp;
@@ -12,10 +10,9 @@
 					&nbsp;&nbsp;
 					角色编码：<input type="text" id="code" name="code" value="${role.code}" class="input-text radius" placeholder="角色编码" style="width:120px;">
 					&nbsp;&nbsp;
-					<button class="btn btn-primary radius" type="submit">查 询</button>
-					<button class="btn btn-success radius" type="button" onclick="clearSerachForm('role_list_form')">清 空</button>
+					<button class="btn btn-primary radius" type="button" onclick="commonQuery(true)">查 询</button>
+					<button class="btn btn-success radius" type="button" onclick="resetSerachForm()">清 空</button>
 				</div>
-			</form>
 			<div class="mt-30">
 				<a class="btn btn-primary radius" data-title="新增" onclick="editRole('');" href="javascript:;">新增</a>
 			</div>
@@ -50,10 +47,9 @@
 						</c:forEach>
 					</tbody>
 				</table>
-              <page:page formId="role_list_form" page="${page}" />  
+            	<page:page formId="list_query_form" page="${page}" ajaxType="true" />  
 			</div>
 		</article>
-	</div>
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript">
 /*添加*/

@@ -26,6 +26,7 @@ import com.innovate.core.util.TextMessage;
 import com.innovate.sys.dic.model.Dic;
 import com.innovate.sys.dic.service.DicUtil;
 import com.innovate.sys.log.service.IVisitLogService;
+import com.innovate.sys.resource.model.Opt;
 import com.innovate.sys.resource.model.Resource;
 import com.innovate.sys.resource.service.IResourceService;
 import com.innovate.user.role.service.IResRoleService;
@@ -75,7 +76,7 @@ public class LoginController {
 		String page = "";
 		Subject currentUser = SecurityUtils.getSubject();
 		if (currentUser.isAuthenticated())
-			page = "redirect:main.do";
+			page = "redirect:main";
 		else {
 			page = "security/login";
 		}
@@ -179,12 +180,9 @@ public class LoginController {
 				model.addAttribute("series",series.toString());
 			}
 		}
-		
-	
-		
 		SessionUtils.removeSessionAttribute("_currentMenu");
 		SessionUtils.removeSessionAttribute("_navstation_path");
-		return "main";
+		return "default_main";
 	}
 	
 	/**
@@ -207,12 +205,12 @@ public class LoginController {
 	        	 SessionUtils.setSessionAttribute("rootLinkList",resService.getAllRootResource());
 	        	 List<Resource> linkList = resService.getAdminResource();
 	        	 Dic menuType = dicUtil.getDicInfo("MENU_TYPE", "MENU_TYPE_FUN");
-		         Map<String,List<String>> menuOptMap = new HashMap<String,List<String>>();
+		         Map<String,List<Opt>> menuOptMap = new HashMap<String,List<Opt>>();
 		         if(null != linkList){
 //		        	 List<String> roleIdList = roleService.getRoleByUserId(userLogin.getId());
 		        	 for(Resource resource : linkList){
 		        		 if(menuType.getId().equals(resource.getMenuType())){//只有功能节点的菜单才有设置的操作权限
-		        			 menuOptMap.put(resource.getId(), roleResOptServ.getOptCodeByRes(resource.getId()));
+		        			 menuOptMap.put(resource.getId(), roleResOptServ.getOptsByRes(resource.getId()));
 		        		 }
 		        	 }
 		         }
@@ -226,12 +224,12 @@ public class LoginController {
 	        	  */
 	        	 List<Resource> optLinkedList = reseRoleService.getResByRoleList(roleList);
 		         Dic menuType = dicUtil.getDicInfo("MENU_TYPE", "MENU_TYPE_FUN");
-		         Map<String,List<String>> menuOptMap = new HashMap<String,List<String>>();
+		         Map<String,List<Opt>> menuOptMap = new HashMap<String,List<Opt>>();
 		         if(null != optLinkedList){
 		        	 List<String> roleIdList = roleService.getRoleByUserId(userLogin.getId());
 		        	 for(Resource resource : optLinkedList){
 		        		 if(menuType.getId().equals(resource.getMenuType())){//只有功能节点的菜单才有设置的操作权限
-		        			 menuOptMap.put(resource.getId(), roleResOptServ.getOptCode(resource.getId(),roleIdList));
+		        			 menuOptMap.put(resource.getId(), roleResOptServ.getOptsByResRole(resource.getId(),roleIdList));
 		        		 }
 		        	 }
 		         }

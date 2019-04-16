@@ -2,6 +2,8 @@ package com.innovate.basic.base;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
  * @2018年3月24日 下午5:23:05
  */
 public class BaseController {
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	/**
 	 * 基于@ExceptionHandler异常处理
 	 * @param request
@@ -23,7 +26,7 @@ public class BaseController {
     @ExceptionHandler  
     public String processException(HttpServletRequest request, Exception ex) 
     {  
-    	ex.printStackTrace();
+    	logger.error("系统运行异常：{}，异常的类：{}",  ex.getMessage(), ex.getClass());;
         request.setAttribute("exDesc", ex.getMessage()) ;
         request.setAttribute("exClass", ex.getClass()) ;
         return "error";   

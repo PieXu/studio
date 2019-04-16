@@ -32,7 +32,7 @@ import com.innovate.work.product.service.IBreaingService;
  */
 @Controller("product.controller.BreaingController")
 public class BreaingController extends BaseController{
-
+ 
 	@Autowired
 	private IBreaingService breaingService;
 	@Autowired
@@ -61,7 +61,7 @@ public class BreaingController extends BaseController{
 		model.addAttribute("page",page);
 		model.addAttribute("breaing", breaing);
 		model.addAttribute("categoryList", categoryList);
-		return "product/list/breaingList";
+		return "product.breaingList";
 	}
 	
 	/**

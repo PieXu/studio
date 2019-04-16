@@ -46,7 +46,7 @@ public class MsgController extends BaseController{
 //		Page<Bearing> page = msgService.pageMsg(msg);
 //		model.addAttribute("page",page);
 		model.addAttribute("msg", msg);
-		return "msg/list/msgList";
+		return "msg.msgList";
 	}
 	
 	

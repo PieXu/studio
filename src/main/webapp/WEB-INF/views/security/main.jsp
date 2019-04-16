@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	<article class="cl pd-20">
-		<p class="f-20 text-success">欢迎使用业务管理平台
+		<p class="f-20 text-success">管理平台业务数据分析
 			<span class="f-14">Beta v1.0</span>
 		</p>
 		<p>

@@ -5,7 +5,8 @@
 <script type="text/javascript" src="lib/jquery.validation/1.14.0/messages_zh.js"></script>
 <script type="text/javascript" src="css/layout/h-ui/js/H-ui.js"></script>
 <script type="text/javascript" src="css/layout/h-ui.admin/js/H-ui.admin.page.js"></script> 
-
+<!-- 通用js -->
+<script type="text/javascript" src="js/common/common.js"></script> 
 <script type="text/javascript">
 /**
  * 菜单选中的判断逻辑

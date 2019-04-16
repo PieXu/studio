@@ -58,7 +58,7 @@ public class ResourceController extends BaseController{
 		model.addAttribute("treeList", treeList);
 		model.addAttribute("menuType", dicUtil.getDicInfo("MENU_TYPE", "MENU_TYPE_FUN"));
 		
-		return "res/list/resourceManage";
+		return "res/resourceManage";
 	}
 	
 	private void setChildList(String parent,List<Resource> treeList ) {

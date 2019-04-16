@@ -81,7 +81,7 @@ public class RoleGrantController extends BaseController{
 		model.addAttribute("resJson", resJson);
 		//只有功能菜单才设置操作
 		model.addAttribute("menuFunType", dicUtil.getDicInfo("MENU_TYPE", "MENU_TYPE_FUN"));
-		return "grant/list/grantList";
+		return "grant/grantList";
 	}
 
 	
@@ -123,7 +123,7 @@ public class RoleGrantController extends BaseController{
 			}
 		}
 		model.addAttribute("menuId",menuId);
-		return "grant/empty/roleOptList";
+		return "grant/roleOptList";
 	}
 	
 	/**

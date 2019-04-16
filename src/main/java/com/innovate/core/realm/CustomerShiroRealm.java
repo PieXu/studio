@@ -20,6 +20,7 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.innovate.basic.exception.AccountExisitException;
+import com.innovate.commom.utils.DateUtils;
 import com.innovate.sys.dic.model.Dic;
 import com.innovate.sys.dic.service.DicUtil;
 import com.innovate.user.user.model.User;
@@ -54,7 +55,8 @@ public class CustomerShiroRealm extends AuthorizingRealm {
 		String loginName = token.getUsername();
 		
 		if(checkIsLogon(loginName)){
-			throw new AccountExisitException("该用户已经登录系统");
+			User userLogin = userService.queryUserByLoginName(loginName);
+			throw new AccountExisitException("该账号于 "+DateUtils.getCustomDateString( userLogin.getLastLoginTime(), "yyyy-MM-dd HH:mm:ss") + " 登录<br/>登录IP地址为： "+userLogin.getLastLoginIp());
 		}else{
 			// 查询有误对应loginname的用户信息
 			User userLogin = userService.queryUserByLoginName(loginName);

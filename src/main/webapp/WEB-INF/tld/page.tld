@@ -15,6 +15,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>ajaxType</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>formId</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>

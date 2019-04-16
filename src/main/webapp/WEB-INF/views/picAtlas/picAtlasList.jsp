@@ -2,9 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://com.innovate.page.tld" prefix="page"%>
-	<div class="Hui-article">
 		<article class="cl pd-20">
-			<form action="pic/listPicAtlas.do" method="post" id="atlas_list_form" >
 				<div class="docs-queryfiled">
 					<span style="padding-left:15px">
 					 图集名称：
@@ -14,11 +12,10 @@
 						图集编号：<input type="text" name="atlasCode" id="atlasCode" value="${picAtlas.atlasCode }" placeholder=" 图集编号" style="width:120px" class="input-text radius">
 					</span>
 					<span style="padding-left:10px">
-						<button class="btn btn-primary radius" type="submit">查 询</button>
-						<button class="btn btn-success radius" type="button" onclick="clearSerachForm('atlas_list_form')">清 空</button>
+						<button class="btn btn-primary radius" type="button" onclick="commonQuery(true)">查 询</button>
+						<button class="btn btn-success radius" type="button" onclick="resetSerachForm()">清 空</button>
 					</span>
 				</div>
-			</form>
 			<div class="mt-30">
 				<page:showOpt code="add" title="新增" type="button" method="atlasEdit('');" />
 			</div>
@@ -50,10 +47,9 @@
 						</c:forEach>
 					</tbody>
 				</table>
-              	<page:page formId="atlas_list_form" page="${page}" />  
+               <page:page formId="list_query_form" page="${page}" ajaxType="true" />  
 			</div>
 		</article>
-	</div>
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript">
 /*新增 修改*/

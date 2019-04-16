@@ -3,6 +3,7 @@ package com.innovate.user.role.service;
 import java.util.List;
 
 import com.innovate.basic.base.IBaseService;
+import com.innovate.sys.resource.model.Opt;
 import com.innovate.user.role.model.RoleResOpt;
 
 /**
@@ -32,14 +33,14 @@ public interface IRoleResOptService extends IBaseService{
 	 * @param roleIdList
 	 * @return
 	 */
-	public List<String> getOptCodeByRes(String resId);
+	public List<Opt> getOptsByRes(String resId);
 	
 	/**
-	 * 获取授权的操作的code的列表
+	 * 获取角色内授权的操作的列表
 	 * @param id
 	 * @param roleIdList
 	 * @return
 	 */
-	public List<String> getOptCode(String id, List<String> roleIdList);
+	public List<Opt> getOptsByResRole(String resId, List<String> roleIdList);
 
 }

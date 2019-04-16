@@ -51,7 +51,7 @@ public class OrderController extends BaseController{
 		model.addAttribute("page",page);
 		model.addAttribute("order", order);
 		model.addAttribute("orderStatus", orderStatus);
-		return "order/list/orderList";
+		return "order.orderList";
 	}
 	
 	/**

@@ -57,7 +57,7 @@ public class SimpleController extends BaseController{
 		String str = data.toString().substring(0,data.toString().length()-1); 
 		str += "]"; 
 		model.addAttribute("data", str);
-		return "sample/list/redis";
+		return "sample/redis";
 	}
 	
 	
@@ -79,7 +79,7 @@ public class SimpleController extends BaseController{
 	@RequestMapping("sample")
 	public String samplePage(HttpServletRequest request,Model model)
 	{
-		return "sample/list/sample";
+		return "sample/sample";
 	}
 	
 	/**

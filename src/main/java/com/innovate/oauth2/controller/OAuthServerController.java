@@ -145,7 +145,7 @@ public class OAuthServerController {
 				String accessToken = HttpClientUtils.doPost(Constants.OAUTH_REDIRECT_ACCESS_TOKEN_URL, paramMap);
 				model.addAttribute(OAuth.OAUTH_ACCESS_TOKEN, accessToken);
 				model.addAttribute(OAuth.OAUTH_REDIRECT_URI, request.getParameter(OAuth.OAUTH_REDIRECT_URI));
-				return "redirect:http://localhost:8088/studio/oauth2_server/access_auth.do";
+				return "redirect:http://localhost:8080/studio/oauth2_server/access_auth.do";
 			}
 		}
 		return null;
@@ -190,6 +190,6 @@ public class OAuthServerController {
 		Object str = request.getParameter("str");
 		Object str1 = request.getParameter("str1");
 		model.addAttribute("userinfo",new String(userinfo));
-		return "oauth/list/test";
+		return "oauth.test";
 	}
 }

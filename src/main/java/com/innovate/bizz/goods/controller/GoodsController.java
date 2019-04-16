@@ -54,7 +54,7 @@ public class GoodsController extends BaseController{
 		model.addAttribute("page",page);
 		model.addAttribute("goods", goods);
 		model.addAttribute("goodsType", goodsType);
-		return "goods/list/goodsList";
+		return "goods/goodsList";
 	}
 	
 	/**

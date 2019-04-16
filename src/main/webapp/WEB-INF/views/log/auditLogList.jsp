@@ -2,16 +2,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://com.innovate.page.tld" prefix="page"%>
-	<div class="Hui-article">
 		<article class="cl pd-20">
-		<form action="log/auditLogList.do" method="post" id="log_list_form" >
 			<div class="docs-queryfiled">
 				用户名：<input type="text" id="visitorName" name="visitorName" value="${log.visitorName }" class="input-text radius" placeholder="访问用户名" style="width:120px;">
 				&nbsp;&nbsp;
-				<button class="btn btn-primary radius" type="submit">查 询</button>
-				<button class="btn btn-success radius" type="button" onclick="clearSerachForm('log_list_form')">清 空</button>
+				<button class="btn btn-primary radius" type="button" onclick="commonQuery(true)">查 询</button>
+				<button class="btn btn-success radius" type="button" onclick="resetSerachForm()">清 空</button>
 			</div>
-			</form>
 			<div class="mt-10">
 				<table class="table table-border table-bordered table-bg table-hover table-sort">
 					<thead>
@@ -39,7 +36,6 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				 <page:page formId="log_list_form" page="${page}" />  
+				<page:page formId="list_query_form" page="${page}" ajaxType="true" />  
 			</div>
 		</article>
-	</div>

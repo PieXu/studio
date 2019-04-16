@@ -44,7 +44,7 @@
 				<img src="images/logo.png" />
 			</div>
 		</div>
-		<form action="http://localhost:8088/studio/oauth2_server/authorize.do" method="post" id="auth_from">
+		<form action="http://localhost:8080/studio/oauth2_server/authorize.do" method="post" id="auth_from">
 			<!-- 隐藏表单参数 -->
 			<input type="hidden" id="grant_type" name="grant_type" value="${grant_type }" />
 			<input type="hidden" id="client_id" name="client_id" value="${client_id}">

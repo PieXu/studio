@@ -54,7 +54,7 @@ public class PicController extends BaseController{
 		Page<PicAtlas> page = picService.listPicAtlas(picAtlas);
 		model.addAttribute("page",page);
 		model.addAttribute("picAtlas", picAtlas);
-		return "picAtlas/list/picAtlasList";
+		return "picAtlas/picAtlasList";
 	}
 	
 	/**

@@ -55,6 +55,7 @@ public class UserController extends BaseController{
 		pageNum = null == pageNum || pageNum == 0 ? 1 : pageNum;
 		PageHelper.startPage(pageNum,CommonCons.DEFAULT_PAGE_SIZE);
 //		user.setIsSuperUser(isSuperUser);
+		user.setDelFlag(CommonCons.STATUS_NORMAL);
 		Page<User> page = userService.pageUser(user);
 		model.addAttribute("page",page);
 		List<Dic> genderList = dicUtil.getDicList("GENDER");
@@ -64,7 +65,7 @@ public class UserController extends BaseController{
 		model.addAttribute("userTypeList",userTypeList);
 		model.addAttribute("userStateList",userStateList);
 		model.addAttribute("userStateEnable",dicUtil.getDicInfo("USER_STATE","USER_STATE_ENABLE"));
-		return "user/list/userList";
+		return "user/userList";
 	}
 	
 	/**
