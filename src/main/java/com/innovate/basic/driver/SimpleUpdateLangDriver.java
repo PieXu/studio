@@ -33,14 +33,11 @@ public class SimpleUpdateLangDriver extends XMLLanguageDriver implements Languag
 							CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, field.getName())));
 				 }
 			}
-
 			sb.deleteCharAt(sb.lastIndexOf(","));
 			sb.append("</set>");
-
 			script = matcher.replaceAll(sb.toString());
 			script = "<script>" + script + "</script>";
 		}
-
 		return super.createSqlSource(configuration, script, parameterType);
 	}
 }

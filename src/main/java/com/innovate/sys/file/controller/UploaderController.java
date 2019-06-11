@@ -62,8 +62,9 @@ public class UploaderController {
 			servletFileUpload.setHeaderEncoding("utf-8");
 			List<FileItem> items = servletFileUpload.parseRequest(request);
 			for (FileItem item : items) {
-				if(!item.isFormField())
+				if(!item.isFormField()){
 					fileId.add(fileService.saveSingleFile(item, false, null, SessionUtils.getCurrentUserId()));
+				}
 			}
 		}
 		return  fileId;

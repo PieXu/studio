@@ -5,7 +5,45 @@
 	<form action="res/saveResOpt.do" method="post" class="form form-horizontal" id="form-res-opt">
 		<input type="hidden" name="resId" value="${resId}"/>
 		<input type="submit" id="sub_btn" style="display:none">
-		<div class="row cl">
+		<table class="table table-border table-bordered table-bg table-hover table-sort mt-10">
+			<thead>
+				<tr class="text-c">
+					<th width="35">选择</th>
+					<th class="text-l" width="80">名称</th>
+					<th width="35">图标</th>
+					<th width="50">类型</th>
+					<th width="50">窗口</th>
+					<th width="60">高度(px)</th>
+					<th width="60">宽度(px)</th>
+					<th>URL</th>
+				</tr>
+			</thead>
+			<tbody>
+			<c:forEach var="opt" items="${ optList}" varStatus="status">  
+				<tr class="text-c">
+					<td><input type="checkbox" value="${opt.id }" name="optId"  <page:checkContains list='${resOptList }' value='${opt.id }'/></td>
+					<td class="text-l">${opt.name }</td>
+					<td><i class="Hui-iconfont ${opt.iconFont}" style="font-size:24px"></i></td>
+					<td><page:idToName dicId="${opt.type }"/></td>
+					<td><page:idToName dicId="${opt.isWindow }"/></td>
+					<td><input type="text" class="input-text radius" autocomplete="off" value="${opt.height }" name="${opt.id}_height"></td>
+					<td><input type="text" class="input-text radius" autocomplete="off" value="${opt.width }" name="${opt.id}_width"></td>
+					<td>
+						<c:choose>
+							<c:when test="${!empty opt.afterUrl }">
+								<input type="text" class="input-text radius" autocomplete="off" value="${opt.afterUrl }" name="${opt.id}_url">
+							</c:when>
+							<c:otherwise>
+								<input type="text" class="input-text radius" autocomplete="off" value="${opt.orginUrl }" name="${opt.id}_url">
+							</c:otherwise>
+						</c:choose>
+					</td>
+				</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		
+		<%-- <div class="row cl">
 			<div class="formControls col-xs-12 col-sm-11">
 				<dl class="permission-list">
 					<dt>
@@ -29,7 +67,7 @@
 					</dd>
 				</dl>
 			</div>
-		</div>
+		</div> --%>
 	</form>
 </article>
 <script type="text/javascript">

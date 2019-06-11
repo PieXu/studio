@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://com.innovate.page.tld" prefix="page"%>
-		<article class="cl pd-20">
 				<div class="docs-queryfiled">
 					<span style="padding-left:15px">
 					 图集名称：
@@ -19,8 +18,7 @@
 			<div class="mt-30">
 				<page:showOpt code="add" title="新增" type="button" method="atlasEdit('');" />
 			</div>
-			<div class="mt-10">
-				<table class="table table-border table-bordered table-bg table-hover table-sort">
+				<table class="table table-border table-bordered table-bg table-hover table-sort mt-10">
 					<thead>
 						<tr class="text-c">
 							<!-- <th width="25"><input type="checkbox" name="" value=""></th> -->
@@ -48,8 +46,6 @@
 					</tbody>
 				</table>
                <page:page formId="list_query_form" page="${page}" ajaxType="true" />  
-			</div>
-		</article>
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript">
 /*新增 修改*/

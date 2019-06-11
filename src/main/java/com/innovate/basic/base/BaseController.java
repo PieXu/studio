@@ -1,10 +1,14 @@
 package com.innovate.basic.base;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 异常处理
@@ -24,11 +28,18 @@ public class BaseController {
 	 * @return
 	 */
     @ExceptionHandler  
-    public String processException(HttpServletRequest request, Exception ex) 
+    @ResponseBody
+    public void processException(HttpServletRequest request, Exception ex, HttpServletResponse response) 
     {  
     	logger.error("系统运行异常：{}，异常的类：{}",  ex.getMessage(), ex.getClass());;
-        request.setAttribute("exDesc", ex.getMessage()) ;
-        request.setAttribute("exClass", ex.getClass()) ;
-        return "error";   
+        try {
+        	StringBuffer script = new StringBuffer();
+        	script.append("parent.layer.msg('系统运行异常,请联系管理员<br/>异常信息：");
+        	script.append(ex.getMessage());
+        	script.append("',{ time: 0,shade:0.3,btn:['知道了'],yes:function(index){parent.layer.closeAll();}});");
+			response.getWriter().write("<script>"+script.toString()+"</script>");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }   
 }

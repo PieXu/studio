@@ -3,8 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://com.innovate.page.tld" prefix="page"%>
 <style>.docs-queryfiled:after{content: "已存在设置列表"}</style>
-	<div class="Hui-article">
-		<article class="cl pd-20">
 			<div class="docs-queryfiled">
 			<form action="code/saveCodeSet.do" method="post" class="form form-horizontal" id="form-admin-add">
 				<table class="table table-border table-bordered table-bg">
@@ -35,15 +33,11 @@
 					</tr>
 				</table>
 			</form>
-			
 			<div class="mt-30">
 				<page:showOpt code="add" title="加载当前DataSource配置" type="button" method="loadProperties();" />
 				<page:showOpt code="add" title="保 存" type="button" method="saveCodeSet();" />
 			</div>
-			
 			</div>
-		</article>
-	</div>
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript">
 

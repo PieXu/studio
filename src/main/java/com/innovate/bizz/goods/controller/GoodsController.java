@@ -1,11 +1,17 @@
 package com.innovate.bizz.goods.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.druid.util.StringUtils;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.innovate.basic.base.BaseController;
@@ -22,6 +29,7 @@ import com.innovate.bizz.util.BizzUtils;
 import com.innovate.sys.file.model.UploadFile;
 import com.innovate.sys.file.service.FileUtil;
 import com.innovate.util.CommonCons;
+import com.innovate.util.HttpClientUtils;
 import com.innovate.util.IdUtil;
 import com.innovate.util.LoggerUtils;
 import com.innovate.util.ResultObject;
@@ -63,6 +71,7 @@ public class GoodsController extends BaseController{
 	 * @param model
 	 * @param id
 	 * @return
+	 * @throws Exception 
 	 */
 	@RequestMapping(value={"goods/addGoods","goods/editGoods"})
 	public String modifyGoods(HttpServletRequest request,Model model,String id)
@@ -70,8 +79,12 @@ public class GoodsController extends BaseController{
 		Goods goods = new Goods();
 		if(!StringUtils.isEmpty(id)){
 			goods =  goodsService.getById(id);
-			List<UploadFile> fileList = fileUtil.getFilesByObjectId(id);
-			model.addAttribute("fileList", fileList);
+			String url = "http://127.0.0.1:8090/file_server/getFileByObjectId";
+			Map<String,String> param = new HashMap<String,String>();
+			param.put("objectId", id);
+			String doPost = HttpClientUtils.doPost(url, param);
+			JSONObject parse = JSONObject.parseObject(doPost);
+			model.addAttribute("fileList", parse.get("data"));
 		}
 		model.addAttribute("goods", goods);
 		model.addAttribute("goodsType", BizzUtils.getGoodsType());
@@ -88,7 +101,7 @@ public class GoodsController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="goods/saveGoods")
-	public ResultObject saveGoods(HttpServletRequest request,Model model, Goods goods,String[] fileId)
+	public ResultObject saveGoods(HttpServletRequest request,Model model, Goods goods,String[] fileId) throws Exception
 	{
 		ResultObject result = new ResultObject();
 		String id = goods.getId();
@@ -106,6 +119,7 @@ public class GoodsController extends BaseController{
 				goodsService.saveGoods(goods,fileId);
 				result.setMessage("产品添加成功");
 			}
+			result.getData().put("objectId", goods.getId());//测试的方法
 			result.setResult(ResultObject.OPERATE_RESULT.success.toString());
 		}catch (Exception e) {
 			result.setResult(ResultObject.OPERATE_RESULT.fail.toString());

@@ -12,7 +12,9 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
-import com.innovate.sys.resource.model.Opt;
+import com.innovate.sys.dic.model.Dic;
+import com.innovate.sys.dic.service.DicUtil;
+import com.innovate.sys.dic.service.impl.DicFactory;
 import com.innovate.user.user.model.User;
 import com.innovate.util.CommonCons;
 import com.innovate.util.LoggerUtils;
@@ -21,6 +23,8 @@ import com.innovate.util.SessionUtils;
 public class OptButtonTag extends BodyTagSupport {
 
 	private static final long serialVersionUID = 4705488191377147514L;
+	
+	private DicUtil dicUtil = DicFactory.getDicUtil();
 	
 	private static final String  TYPE_BUTTON ="button";
 	private static final String  TYPE_LINK ="link";
@@ -60,26 +64,36 @@ public class OptButtonTag extends BodyTagSupport {
 	 */
 	private String outButtonString(){
 		StringBuilder builder = new StringBuilder();
-		User loginUser = (User) SecurityUtils.getSubject().getPrincipal();
-		// 超级管理员的权限的输出按钮的操作
-//		if(CommonCons.Y_N_ENUM.Y.toString().equals(loginUser.getIsSuperUser())){
-			List<Opt> currentResOptList = getCurrentResOptList();
-			if(null!=currentResOptList){
-				for(Opt opt : currentResOptList){
+		List<Map<String,Object>> currentResOptList = getCurrentResOptList();
+		Dic buttonOpt = dicUtil.getDicInfo("SYS_OPT_TYPE", "OPT_TYPE_BUTTON");
+		if(null!=currentResOptList){
+			for(Map<String,Object> map : currentResOptList){
+				if(buttonOpt.getId().equals(map.get("type"))){ // 按钮域的输出通过 类型控制一下
 					builder.append("<input type=\"button\"")
-					   .append("value=\"").append(opt.getName()).append("\"")
-					   .append("id=\"").append(opt.getName()).append("_opt_id\"")
-					   .append("title=\"").append(opt.getName()).append("\"");
+					   .append("value=\"").append(map.get("name")).append("\"")
+					   .append("id=\"").append(map.get("type")).append("_opt_id\"")
+					   .append("title=\"").append(map.get("type")).append("\"");
 					if(StringUtils.isNotBlank(styleClass)){
 						builder.append(" class=\"").append(styleClass).append("\"");
 					}else{
 						builder.append(" class=\"").append(DEFAULT_BUTTON_CLASS).append("\"");
 					}
-					builder.append(" />&nbsp;");
+					// 弹出窗口的操作方法
+					if(map.containsKey("isWindow") && map.get("isWindow").equals(dicUtil.getDicY().getId())){
+						builder.append(" onclick='_common_open_win(")
+							   .append(map.get("width")).append(",")
+							   .append(map.get("height")).append(",\"")
+							   .append(map.get("url")).append("\");'");
+					}else{//异步链接的方法
+						builder.append(" onclick='_deals_Ajax(");
+						builder.append("\"").append(map.get("url"));
+						builder.append("\",\"").append(map.get("name"));
+						builder.append("\");'");
+					}
+					builder.append("/>&nbsp;");
 				}
 			}
-//		}else{ // 角色用户的操作按钮
-//		}
+		}
 		return builder.toString();
 	}
 
@@ -92,12 +106,11 @@ public class OptButtonTag extends BodyTagSupport {
 		User loginUser = (User) SecurityUtils.getSubject().getPrincipal();
 		// 超级管理员的权限的输出按钮的操作
 		if(CommonCons.Y_N_ENUM.Y.toString().equals(loginUser.getIsSuperUser())){
-			List<Opt> currentResOptList = getCurrentResOptList();
+			List<Map<String,Object>> currentResOptList = getCurrentResOptList();
 			if(null!=currentResOptList){
-				for(Opt opt : currentResOptList){
+				for(Map<String,Object> map : currentResOptList){
 					builder.append("<a style=\"text-decoration:none\" class=\"ml-5\" href=\"javascript:;\" ")
-					   .append("value=\"").append(opt.getName()).append("\"_opt_id")
-					   .append("title=\"").append(opt.getName()).append("\"");
+					   .append("value=\"").append(map.get("name")).append("\"_opt_id");
 					if(StringUtils.isNotBlank(styleClass)){
 						builder.append(" class=\"").append(styleClass).append("\"");
 					}else{
@@ -107,7 +120,7 @@ public class OptButtonTag extends BodyTagSupport {
 					if(StringUtils.isNotBlank(iconfont)){
 						builder.append("<i class=\"Hui-iconfont\">").append(iconfont).append("</i>");
 					}else{
-						builder.append(opt.getName());
+						builder.append(map.get("name"));
 					}
 					builder.append("</a>");
 				}
@@ -116,37 +129,37 @@ public class OptButtonTag extends BodyTagSupport {
 		}
 		return builder.toString();
 	}
-	/**
-	 * 判断是否有操作权限
-	 * @param code
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	private boolean checkPremisson(String code) 
-	{
-		Subject currentUser = SecurityUtils.getSubject();
-		Session session = currentUser.getSession();
-		if(null!=session){
-			 Map<String,List<Opt>> menuOptMap  = (Map<String, List<Opt>>) session.getAttribute("_menuOptMap");
-			 if(null!= menuOptMap && !menuOptMap.isEmpty()){
-				 String currentMenu = (String) session.getAttribute("_currentMenu");
-				 List<Opt> strList = menuOptMap.get(currentMenu);
-				 if(null!= strList && !strList.isEmpty()){
-					 return strList.contains(code);
-				 }
-			 }
-		}
-		return false;
-	}
+//	/**
+//	 * 判断是否有操作权限
+//	 * @param code
+//	 * @return
+//	 */
+//	@SuppressWarnings("unchecked")
+//	private boolean checkPremisson(String code) 
+//	{
+//		Subject currentUser = SecurityUtils.getSubject();
+//		Session session = currentUser.getSession();
+//		if(null!=session){
+//			 Map<String,List<Opt>> menuOptMap  = (Map<String, List<Opt>>) session.getAttribute("_menuOptMap");
+//			 if(null!= menuOptMap && !menuOptMap.isEmpty()){
+//				 String currentMenu = (String) session.getAttribute("_currentMenu");
+//				 List<Opt> strList = menuOptMap.get(currentMenu);
+//				 if(null!= strList && !strList.isEmpty()){
+//					 return strList.contains(code);
+//				 }
+//			 }
+//		}
+//		return false;
+//	}
 	
 	/**
 	 * 当前菜单配置的操作
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	private  List<Opt> getCurrentResOptList()
+	private  List<Map<String,Object>> getCurrentResOptList()
 	{
-	    Map<String,List<Opt>> sessionAttribute = (Map<String, List<Opt>>) SessionUtils.getSessionAttribute("_menuOptMap");
+	    Map<String,List<Map<String,Object>>> sessionAttribute = (Map<String, List<Map<String,Object>>>) SessionUtils.getSessionAttribute("_menuOptMap");
 		Subject currentUser = SecurityUtils.getSubject();
 		Session session = currentUser.getSession();
 		if(null!=sessionAttribute){

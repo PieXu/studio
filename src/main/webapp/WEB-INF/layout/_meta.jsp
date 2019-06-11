@@ -21,7 +21,6 @@
 <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
 <script type="text/javascript" src="lib/jquery/jquery.cookie.js"></script> 
 <script type="text/javascript" src="lib/layer/3.0/layer.js"></script>
-
 <!--表单验证 JS-->
 <script type="text/javascript" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
 <script type="text/javascript" src="lib/jquery.validation/1.14.0/validate-methods.js"></script> 

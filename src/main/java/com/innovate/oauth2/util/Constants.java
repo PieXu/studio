@@ -39,7 +39,7 @@ public class Constants {
 	public static final String OAUTH_AUTHORIZE_FAILED_CODE = "OAuth2FailedCode";
 	
 	
-	public static final String BASE_DOMAIN_URL = "http://localhost:8080/studio";
+	public static final String BASE_DOMAIN_URL = "http://localhost:9000/studio";
 	
 	/**
 	 * 验证code的回调函数URL
@@ -60,6 +60,13 @@ public class Constants {
 	 * 获取资源URL
 	 */
 	public static final String  OAUTH_REDIRECT_AUTH_USER_URL = BASE_DOMAIN_URL + "/oauth2/authUser.do";
+	
+	/**
+	 * 获取资源URL
+	 */
+	public static final String  OAUTH_REDIRECT_ACCESS_AUTH_URL = BASE_DOMAIN_URL + "/oauth2_server/access_auth.do";
+	
+	
 
 	/**
 	 * 授权失败认证码

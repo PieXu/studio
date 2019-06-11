@@ -24,10 +24,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
-import com.innovate.commom.utils.HttpClientUtils;
-import com.innovate.commom.utils.LoggerUtils;
 import com.innovate.oauth2.service.IOAuthService;
 import com.innovate.oauth2.util.Constants;
+import com.innovate.util.HttpClientUtils;
+import com.innovate.util.LoggerUtils;
 
 /**
  * 登录认证服务
@@ -108,7 +108,7 @@ public class OAuthServerController {
 						.buildQueryMessage();
 				requestUrl = accessTokenRequest.getLocationUri();
 			} catch (OAuthSystemException e) {
-				LoggerUtils.error(getClass(), e);
+				LoggerUtils.error(getClass(), e.getMessage());
 			}
 			return "redirect:" + requestUrl;
 		} 
@@ -145,7 +145,7 @@ public class OAuthServerController {
 				String accessToken = HttpClientUtils.doPost(Constants.OAUTH_REDIRECT_ACCESS_TOKEN_URL, paramMap);
 				model.addAttribute(OAuth.OAUTH_ACCESS_TOKEN, accessToken);
 				model.addAttribute(OAuth.OAUTH_REDIRECT_URI, request.getParameter(OAuth.OAUTH_REDIRECT_URI));
-				return "redirect:http://localhost:8080/studio/oauth2_server/access_auth.do";
+				return "redirect:" + Constants.OAUTH_REDIRECT_ACCESS_AUTH_URL;
 			}
 		}
 		return null;
@@ -178,7 +178,7 @@ public class OAuthServerController {
 		model.addAttribute("str1", resp);
 		//如果存在调用的url则回调，如果不存在则回调默认的认证成功提示页面
 		if(StringUtils.isNotBlank(redirectUri)){
-			return new ModelAndView("redirect:" + redirectUri).addObject("userinfo",resp.getBytes()).addObject("str1", o);
+			return new ModelAndView("redirect:" + redirectUri).addObject("userinfo",resp);
 		}
 		return null;
 	}
@@ -190,6 +190,6 @@ public class OAuthServerController {
 		Object str = request.getParameter("str");
 		Object str1 = request.getParameter("str1");
 		model.addAttribute("userinfo",new String(userinfo));
-		return "oauth.test";
+		return "oauth/test";
 	}
 }

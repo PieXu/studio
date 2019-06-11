@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
+import com.github.pagehelper.Page;
 import com.innovate.basic.driver.SimpleInLangDriver;
 import com.innovate.basic.driver.SimpleInsertLangDriver;
 import com.innovate.basic.driver.SimpleSelectLangDriver;
@@ -30,8 +31,8 @@ public interface OptDao {
 	 * @return
 	 */
 	@Lang(SimpleSelectLangDriver.class)
-	@Select("select * from "+Opt.TAB_NAME)
-	public List<Opt> getAllOpt();
+	@Select("select * from "+Opt.TAB_NAME+" (#{opt}) ")
+	public Page<Opt> getAllOpt(Opt opt);
 
 	/**
 	 * 
@@ -64,7 +65,7 @@ public interface OptDao {
 	 * @return
 	 */
 	@Lang(SimpleInLangDriver.class)
-	@Delete("select count(*) from "+ResOpt.TAB_NAME+" where opt_id in (#{optIds})")
+	@Select("select count(*) from "+ResOpt.TAB_NAME+" where opt_id in (#{optIds})")
 	public int getCountByOptId(@Param("optIds")String[] optIds);
 
 	/**

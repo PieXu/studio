@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://com.innovate.page.tld" prefix="page"%>
-		<article class="cl pd-20">
 			<div class="docs-queryfiled">
 				分类名称：<input type="text" id="categoryName" name="categoryName" value="${dicCateogry.categoryName }" class="input-text radius" style="width:180px;">
 				&nbsp;&nbsp;
@@ -13,11 +12,10 @@
 				<button class="btn btn-primary radius" type="button" onclick="commonQuery(true)">查 询</button>
 				<button class="btn btn-success radius" type="button" onclick="resetSerachForm()">清 空</button>
 			</div>
-			<div class="text-l">
+			<div class="mt-30">
 				<a class="btn btn-primary radius" data-title="新增"  onclick="edit('');" href="javascript:;">新增</a>
 			</div>
-			<div class="mt-10">
-				<table class="table table-border table-bordered table-bg table-hover table-sort">
+				<table class="table table-border table-bordered table-bg table-hover table-sort mt-10">
 					<thead>
 						<tr class="text-c">
 							<th width="30">序号</th>
@@ -47,7 +45,6 @@
 					</tbody>
 				</table>
                 <page:page formId="list_query_form" page="${page}" ajaxType="true" /> 
-		</article>
 <script type="text/javascript">
 /*添加*/
 function edit(id){

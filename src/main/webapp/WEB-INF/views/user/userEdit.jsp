@@ -64,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="row cl">
 			<label class="form-label col-xs-3 col-sm-2">备注：</label>
 			<div class="formControls col-xs-9 col-sm-10">
-				<textarea name="comments" cols="" rows="" class="textarea"  placeholder="说点什么...100个字符以内" dragonfly="true">${user.comments }</textarea>
+				<textarea name="comments" cols="" rows="" class="textarea valid"  placeholder="说点什么...100个字符以内" dragonfly="true">${user.comments }</textarea>
 			</div>
 		</div>
 		<input type="submit" id="sub_btn" value="提 交" style="display:none">

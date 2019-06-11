@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.ibatis.mapping.SqlSource;
-import org.apache.ibatis.scripting.LanguageDriver;
 import org.apache.ibatis.scripting.xmltags.XMLLanguageDriver;
 import org.apache.ibatis.session.Configuration;
 
@@ -18,7 +17,7 @@ import com.innovate.basic.annotation.LikeQuery;
  * MyBatis查询转义 Select通用
  * @author IvanHsu
  */
-public class SimpleSelectLangDriver extends XMLLanguageDriver implements LanguageDriver 
+public class SimpleSelectLangDriver extends XMLLanguageDriver
 {
 	private final Pattern inPattern = Pattern.compile("\\(#\\{(\\w+)\\}\\)");
 
@@ -29,7 +28,7 @@ public class SimpleSelectLangDriver extends XMLLanguageDriver implements Languag
 		if (matcher.find()) {
 			StringBuilder sb = new StringBuilder();
 			sb.append("<where> 1=1 ");
-			parameterType.getSuperclass(); 
+//			parameterType.getSuperclass(); 
 			Field[] fs = new Field[]{};
 			fs = getBeanFields(parameterType,fs);
 			for (Field field : fs) {
@@ -60,7 +59,6 @@ public class SimpleSelectLangDriver extends XMLLanguageDriver implements Languag
 			script = matcher.replaceAll(sb.toString());
 			script = "<script>" + script + "</script>";
 		}
-
 		return super.createSqlSource(configuration, script, parameterType);
 	}
 	

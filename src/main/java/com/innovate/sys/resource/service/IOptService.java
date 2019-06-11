@@ -2,6 +2,7 @@ package com.innovate.sys.resource.service;
 
 import java.util.List;
 
+import com.github.pagehelper.Page;
 import com.innovate.basic.base.IBaseService;
 import com.innovate.sys.resource.model.Opt;
 
@@ -10,14 +11,14 @@ import com.innovate.sys.resource.model.Opt;
  * @author IvanHsu
  * @2018年3月26日 上午10:35:07
  */
-public interface IOptService extends IBaseService{
+public interface IOptService extends IBaseService<Opt>{
 
 	/**
 	 * 所有操作列表
 	 * 不分页
 	 * @return
 	 */
-	public List<Opt> getAllOpt();
+	public Page<Opt> getAllOpt(Opt opt);
 
 	/**
 	 * 主键查找操作

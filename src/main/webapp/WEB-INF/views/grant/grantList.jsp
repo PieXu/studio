@@ -7,17 +7,15 @@
 	.ztree ul li .line{border:0}
 	.ztree{border:1px solid #ddd;min-height: 500px}
 </style>
-<article class="cl pd-20">
 	<input type="hidden" id="menuFunType"  value="${menuFunType.id }"/>
 	<table class="table">
 		<tr>
-			<td width="200" class="va-t" style="height: 90%"><ul id="treeDemo" class="ztree" ></ul></td>
+			<td width="200" class="va-t" style="height: 95%"><ul id="treeDemo" class="ztree" ></ul></td>
 			<td class="va-t" id="user_opt_td">
 				
 			</td>
 		</tr>
 	</table>
-</article>
 <script type="text/javascript">
 /**
  * 设置
@@ -62,7 +60,7 @@ function saveRoleOpt()
 		$.ajax({
 		   type: "POST",
 		   url: "grant/saveRoleOpt.do",
-		   data: $("#form-roleopt-grant").serialize() ,
+		   data: $("#list_query_form").serialize() ,
 		   success: function(data){
 			   //data =  $.parseJSON( data )
 			   if( data.result == "success"){

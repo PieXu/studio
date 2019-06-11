@@ -2,6 +2,7 @@ package com.innovate.sys.resource.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.druid.util.StringUtils;
 import com.innovate.basic.base.BaseController;
 import com.innovate.sys.dic.service.DicUtil;
-import com.innovate.sys.resource.model.Opt;
 import com.innovate.sys.resource.model.Resource;
 import com.innovate.sys.resource.service.IOptService;
 import com.innovate.sys.resource.service.IResOptService;
@@ -37,8 +37,8 @@ public class ResourceController extends BaseController{
 	private IResourceService resService;
 	@Autowired
 	private IResOptService resOptService;
-	@Autowired
-	private IOptService optService;
+//	@Autowired
+//	private IOptService optService;
 	
 	/**
 	 * 菜单管理跳转，默认展开顶级的菜单
@@ -176,12 +176,12 @@ public class ResourceController extends BaseController{
 	@RequestMapping(value={"res/editResOpt"})
 	public String editResOpt(HttpServletRequest request,Model model,String resId)
 	{
-		List<Opt> optList = optService.getAllOpt();
 		if(!StringUtils.isEmpty(resId)){
+			List<Map<String,Object>> optMap = resOptService.getResOptByResId(resId);
 			List<String> resOptList =  resOptService.getOptIdByResId(resId);
 			model.addAttribute("resOptList", resOptList);
+			model.addAttribute("optList", optMap);
 		}
-		model.addAttribute("optList", optList);
 		model.addAttribute("resId", resId);
 		return "res/nsm/resOpt";
 	}
@@ -201,7 +201,7 @@ public class ResourceController extends BaseController{
 		String[] optIds  = request.getParameterValues("optId");
 		if(!StringUtils.isEmpty(resId)){
 			try{
-				resOptService.saveResOpt(resId,optIds);
+				resOptService.saveResOpt(resId,optIds,request);
 				result.setResult(ResultObject.OPERATE_RESULT.success.toString());
 				result.setMessage("菜单操作授权成功");
 			}catch (Exception e) {

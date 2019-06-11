@@ -115,8 +115,27 @@ public class DicServiceImpl implements IDicService {
 	}
 
 	@Override
+	@CacheEvict(value={"com.innovate.sys.service.impl.DicServiceImpl"}, key="'getUserStatusEnable'") 
 	public Dic getUserStatusEnable() {
 		return this.getDicInfo("USER_STATE", "USER_STATE_ENABLE");
+	}
+
+	@Override
+	@CacheEvict(value={"com.innovate.sys.service.impl.DicServiceImpl"}, key="'getSystemYAndN'") 
+	public List<Dic> getSystemYAndN() {
+		return this.getDicList("Y&N");
+	}
+
+	@Override
+	@CacheEvict(value={"com.innovate.sys.service.impl.DicServiceImpl"}, key="'getDicY'") 
+	public Dic getDicY() {
+		return getDicInfo("Y&N", "Y");
+	}
+
+	@Override
+	@CacheEvict(value={"com.innovate.sys.service.impl.DicServiceImpl"}, key="'getDicN'") 
+	public Dic getDicN() {
+		return getDicInfo("Y&N", "N");
 	}
 
 }

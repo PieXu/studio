@@ -1,12 +1,9 @@
 package com.innovate.util;
 
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
-
-import com.innovate.sys.resource.model.Resource;
 
 public class CommonUtils {
 

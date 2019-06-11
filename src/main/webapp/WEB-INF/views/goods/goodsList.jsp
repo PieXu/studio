@@ -2,9 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://com.innovate.page.tld" prefix="page"%>
-<article class="cl pd-20">
 		<div class="docs-queryfiled">
-			分类：
+			<span style="vertical-align: bottom;">分类：
 			<span class="select-box inline radius">
 				<c:if test="${!empty goodsType }">
 					<select name="goodsType" id="goodsType" class="select radius">
@@ -15,7 +14,8 @@
 					</select>
 				</c:if>
 			</span> 
-			<span style="padding-left:15px">
+			</span>
+			<span style="vertical-align: bottom;">
 				名称：<input type="text" name="goodsName" id="goodsName" value="${goods.goodsName }" placeholder=" 商品名称" style="width:280px" class="input-text radius">
 			</span>
 			<span style="padding-left:10px">
@@ -27,8 +27,7 @@
 	<div class="mt-30">
 		<page:showOpt code="add" title="新增" type="button" method="goods_edit('');" />
 	</div>
-	<div class="mt-10" id="pageTable">
-		 <table class="table table-border table-bordered table-bg table-hover table-sort">
+		 <table class="table table-border table-bordered table-bg table-hover table-sort "mt-10">
 			<thead>
 				<tr class="text-c">
 					<th width="25"><input type="checkbox" name="" value=""></th>
@@ -68,9 +67,6 @@
 			</tbody>
 		</table>
         <page:page formId="list_query_form" page="${page}" ajaxType="true" /> 
-	</div>
-	</form>
-</article>
 
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript">

@@ -26,7 +26,6 @@ import com.innovate.core.util.TextMessage;
 import com.innovate.sys.dic.model.Dic;
 import com.innovate.sys.dic.service.DicUtil;
 import com.innovate.sys.log.service.IVisitLogService;
-import com.innovate.sys.resource.model.Opt;
 import com.innovate.sys.resource.model.Resource;
 import com.innovate.sys.resource.service.IResourceService;
 import com.innovate.user.role.service.IResRoleService;
@@ -205,7 +204,7 @@ public class LoginController {
 	        	 SessionUtils.setSessionAttribute("rootLinkList",resService.getAllRootResource());
 	        	 List<Resource> linkList = resService.getAdminResource();
 	        	 Dic menuType = dicUtil.getDicInfo("MENU_TYPE", "MENU_TYPE_FUN");
-		         Map<String,List<Opt>> menuOptMap = new HashMap<String,List<Opt>>();
+		         Map<String,List<Map<String,Object>>> menuOptMap = new HashMap<String,List<Map<String,Object>>>();
 		         if(null != linkList){
 //		        	 List<String> roleIdList = roleService.getRoleByUserId(userLogin.getId());
 		        	 for(Resource resource : linkList){
@@ -224,7 +223,7 @@ public class LoginController {
 	        	  */
 	        	 List<Resource> optLinkedList = reseRoleService.getResByRoleList(roleList);
 		         Dic menuType = dicUtil.getDicInfo("MENU_TYPE", "MENU_TYPE_FUN");
-		         Map<String,List<Opt>> menuOptMap = new HashMap<String,List<Opt>>();
+		         Map<String,List<Map<String,Object>>> menuOptMap = new HashMap<String,List<Map<String,Object>>>();
 		         if(null != optLinkedList){
 		        	 List<String> roleIdList = roleService.getRoleByUserId(userLogin.getId());
 		        	 for(Resource resource : optLinkedList){

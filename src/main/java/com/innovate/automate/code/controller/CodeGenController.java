@@ -38,7 +38,7 @@ public class CodeGenController extends BaseController{
 	{
 		CodeGenSetting genSet = CodeGenUtils.getCodeSetting(); 
 		if(null!=genSet){
-			List<TableInfo> tableList = TableUtils.getTables(genSet.getDbDriver(),genSet.getDbUrl(),genSet.getDbUser(),genSet.getDbPass());
+			List<TableInfo> tableList = TableUtils.getTables();
 			model.addAttribute("tableList", tableList);
 		}
 		return "automate/db/tableList";

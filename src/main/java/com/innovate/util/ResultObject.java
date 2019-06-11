@@ -1,11 +1,15 @@
 package com.innovate.util;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 返回对象
  */
 public class ResultObject {
 	private String result;
 	private String message;
+	private Map<String,Object> data = new HashMap<String,Object>();
 
 	public String getResult() {
 		return result;
@@ -22,6 +26,15 @@ public class ResultObject {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+	public Map<String, Object> getData() {
+		return data;
+	}
+
+	public void setData(Map<String, Object> data) {
+		this.data = data;
+	}
+
 
 	/**
 	 * 

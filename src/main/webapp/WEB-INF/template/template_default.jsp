@@ -4,6 +4,7 @@
 <html>
 <head>
  <base href="${rc.contextPath}/">
+ <script type="text/javascript" src="${rc.contextPath}/lib/My97DatePicker/4.8/WdatePicker.js"></script>
  <tiles:insertAttribute name="meta" />
  <title>后台管理系统</title>
 </head>
@@ -20,7 +21,7 @@
 		<a class="btn btn-success radius r" id="btn-refresh" style="line-height:1.6em;margin-top:3px" onclick="javascript:commonQuery();" href="javascript:void(0);"  title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
 	</nav>
 	<form action="${_redirect_link}" method="post" id="list_query_form">
-		<div class="Hui-article" id="_main_body"></div>
+		<article class="Hui-article cl pd-20"  id="_main_body"></article>
 	</form>
 </section>
 <!--_footer 作为公共模版分离出去-->

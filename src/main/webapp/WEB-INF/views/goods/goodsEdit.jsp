@@ -91,7 +91,7 @@ display:none;
 						<ul id="filelist" class="filelist">
 							<c:forEach items="${ fileList}" var="file">
 								<li class="img-div fl" id="imgli_${file.id }" onmouseover="showDel(this,'${file.id }')" onmouseleave="hideDel(this,'${file.id }')" >
-									<img src="file/openFile.do?id=${file.id }&type=image"  style="width: 100%;height: 100%" />
+									<img src="http://127.0.0.1:8088//${file.fullPath}"  style="width: 100%;height: 100%" />
 									<input type="hidden" name="fileId" value="${file.id}"/>
 									<div class="file-panel" id="del_${file.id }">
 								        <span class="cancel" onclick="del_img('${file.id }');">删除</span>
@@ -149,7 +149,8 @@ display:none;
 	
 	//删除图片
 	function del_img(id) {
-		layer.confirm('确定要删除吗？', {
+		$("#imgli_" + id).remove();
+		/* layer.confirm('确定要删除吗？', {
 			btn : [ '确定', '取消' ]
 		//按钮
 		}, function() {
@@ -158,7 +159,7 @@ display:none;
 				icon : 1
 			});
 		}, function() {
-		});
+		}); */
 	}
 
 
@@ -199,7 +200,39 @@ $(function(){
 		focusCleanup:true,
 		success:"valid",
 		submitHandler:function(form){
-			uploader.upload();
+			 $.ajax({
+				   type: "POST",
+				   url: "goods/saveGoods.do",
+				   data: $(form).serialize() ,
+				   success: function(data){
+					   if( data.result == "success"){
+						    var objectId = data.data.objectId;
+						  /*   uploader.on('uploadBeforeSend', function (obj, data) {
+						        data = {
+						            "objectId":objectId,
+						            "operator": "管理员"}
+						        }); */
+						        
+						    var fileIds =  $("input[name=fileId]").map(function(){return this.value;}).get().join(",");
+					       // alert(fileIds);
+					        uploader.onUpload(objectId,"管理员","bUYA+chR0FEiO8/X/yDZ3g==",fileIds);   
+						   /*  var obj = new Object();
+				            obj.objectId = objectId;
+				            obj.operator = "管理员";
+						    uploader.options.formData=obj;
+						    uploader.upload();
+						    uploader.on('uploadSuccess', function(file,response) {
+					            alert(JSON.stringify(response));
+					            console.log("file:",file);
+					            console.log("response:",response);
+					        }); */
+					   }else{
+						   layer.msg(data.message,{icon:2,time:1000});
+					   }
+				   }
+				});  
+			
+			/* uploader.upload();
 			uploader.on( 'uploadFinished', function() {
 				$.ajax({
 					   type: "POST",
@@ -215,7 +248,7 @@ $(function(){
 						   }
 					   }
 					});
-			});
+			});   */
 		}
 	});
 });

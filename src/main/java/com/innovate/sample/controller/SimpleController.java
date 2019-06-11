@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.innovate.basic.base.BaseController;
 import com.innovate.cache.RedisDistributeLockUtils;
 import com.innovate.cache.RedisUtils;
-import com.innovate.commom.utils.IdUtils;
+import com.innovate.util.IdUtil;
 
 /**
  * 实例演示 controller
@@ -92,7 +92,7 @@ public class SimpleController extends BaseController{
 	@RequestMapping(value = "lock", produces = "text/plain; charset=utf-8")
 	public String redisLock(HttpServletRequest request,Model model)
 	{
-		String userId = IdUtils.getUUID();
+		String userId = IdUtil.getUUID();
 		String msg = "";
 		boolean bol = RedisDistributeLockUtils.tryLock("resource",userId, 5000, 90000);
 		if(bol){

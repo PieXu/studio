@@ -1,12 +1,12 @@
 <%@page contentType="text/html;charset=utf-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-	<article class="cl pd-20">
+	<div class="cl pd-20">
 		<p class="f-20 text-success">欢迎使用业务管理平台
 			<span class="f-14">Beta v1.0</span>
 		</p>
 		<div id="container" style="width:100%;height:80%"></div>
-	</article>
+	</div>
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="lib/hcharts/Highcharts/5.0.6/js/highcharts.js"></script>
 <script type="text/javascript" src="lib/hcharts/Highcharts/5.0.6/js/modules/exporting.js"></script>

@@ -163,6 +163,59 @@
 		</attribute>
 	</tag>
 	
+	<!-- 查询区域的输出 -->
+	<tag>
+		<name>showQueryFiled</name>
+		<tagclass>com.innovate.basic.tag.CommonQueryFiled</tagclass>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>list</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>conditions</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<!-- 列表区域的输出 -->
+	<tag>
+		<name>showListFiled</name>
+		<tagclass>com.innovate.basic.tag.CommonListFiled</tagclass>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>list</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>page</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<!-- 新增编辑区域的输出 -->
+	<tag>
+		<name>showEditFiled</name>
+		<tagclass>com.innovate.basic.tag.CommonEditFiled</tagclass>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>list</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>bizObject</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	
+	
     <!-- 操作菜单权限判断输出 -->
 	<tag>
 		<name>optArea</name>

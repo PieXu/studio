@@ -42,5 +42,29 @@ public abstract interface DicUtil {
 	 * @return
 	 */
 	public Dic getUserStatusEnable();
+	
+	/**
+	 * 是否集合 用的比较多
+	* <p>Title: getSystemYAndN</p>
+	* <p>Description: </p>
+	* @return
+	 */
+	public List<Dic> getSystemYAndN();
+	
+	/**
+	 * 
+	* <p>Title: getDicY</p>
+	* <p>Description: </p>
+	* @return
+	 */
+	public Dic getDicY();
+	
+	/**
+	 * 
+	* <p>Title: getDicN</p>
+	* <p>Description: </p>
+	* @return
+	 */
+	public Dic getDicN();
 
 }

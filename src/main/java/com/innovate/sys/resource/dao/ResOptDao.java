@@ -1,6 +1,7 @@
 package com.innovate.sys.resource.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -48,7 +49,28 @@ public interface ResOptDao {
 	 * @param resId
 	 * @return
 	 */
+	@Lang(SimpleInsertLangDriver.class)
 	@Select("select * from " + Opt.TAB_NAME +" where id in ( select opt_id from "+ ResOpt.TAB_NAME +" where res_id = #{resId} )")
 	public List<Opt> getOptByResId(String resId);
+
+	/**
+	* <p>Title: getByResId</p>
+	* <p>Description: </p>
+	* @param resId
+	* @return
+	 */
+	@Select("SELECT	"
+			+ "p.id AS id,"
+			+ "p. NAME AS name,"
+			+ "p. CODE AS code,"
+			+ "p.type AS type,"
+			+ "p.url AS orginUrl,"
+			+ "p.IS_WINDOW AS isWindow,"
+			+ "s.WIDTH AS width,"
+			+ "s.HEIGHT AS height,"
+			+ "s.URL AS afterUrl,"
+			+ "p.ICON_FONT AS iconFont "
+			+ "FROM t_sys_opt p LEFT JOIN ( select * from t_res_opt t where t.RES_ID = #{resId}) as s ON p.ID = s.OPT_ID")
+	public List<Map<String, Object>> getByResId(String resId);
 
 }

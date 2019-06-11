@@ -8,16 +8,12 @@ package com.innovate.basic.base;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.innovate.basic.annotation.Invisible;
-
 /**
  * @time: 2017年6月12日 下午4:11:45
  * @author
  */
+@SuppressWarnings("serial")
 public class BaseModel implements Serializable {
-
-	@Invisible
-	private static final long serialVersionUID = -335105649685865151L;
 
 	private String id;
 

@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://com.innovate.page.tld" prefix="page"%>
-		<article class="cl pd-20">
 			<div class="docs-queryfiled">
 				名称：<input type="text" id="name" name="name" value="${dic.name }" class="input-text radius" placeholder="字典名称" style="width:180px;">
 				&nbsp;&nbsp;
@@ -27,8 +26,7 @@
 				<a class="btn btn-primary radius" data-title="新增" _href="article-add.html" onclick="edit('');" href="javascript:;">新增</a>
 				<a href="javascript:void(0);" onclick="datadel()" class="btn btn-danger radius" data-title="删除">删除</a>
 			</div>
-			<div class="mt-10">
-				<table class="table table-border table-bordered table-bg table-hover table-sort">
+				<table class="table table-border table-bordered table-bg table-hover table-sort mt-10">
 					<thead>
 						<tr class="text-c">
 							<th width="25"><input type="checkbox" name="" value=""></th>
@@ -60,7 +58,6 @@
 					</tbody>
 				</table>
          		<page:page formId="list_query_form" page="${dicList}" ajaxType="true" /> 
-		</article>
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript">
 /*添加*/

@@ -322,9 +322,4 @@ public class UserController extends BaseController{
 		}
 		return result;
 	}
-	
-	
-	
-	
-	
 }

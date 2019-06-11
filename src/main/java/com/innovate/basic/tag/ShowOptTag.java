@@ -91,7 +91,7 @@ public class ShowOptTag extends BodyTagSupport {
 	 */
 	private String outLinkString(){
 		StringBuilder builder = new StringBuilder();
-		builder.append("<a style=\"text-decoration:none\" class=\"ml-5\" href=\"javascript:;\" ")
+		builder.append("<a style=\"text-decoration:none\"   data-toggle=\"tooltip\" data-placement=\"bottom\" class=\"ml-5\" href=\"javascript:;\" ")
 		   .append("value=\"").append(title).append("\"")
 		   .append("title=\"").append(title).append("\"");
 		if(StringUtils.isNotBlank(styleClass)){

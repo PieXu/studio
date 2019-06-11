@@ -33,12 +33,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alibaba.fastjson.JSONObject;
 import com.innovate.basic.base.BaseController;
-import com.innovate.commom.utils.LoggerUtils;
 import com.innovate.oauth2.model.OAuthClient;
 import com.innovate.oauth2.service.IOAuthService;
 import com.innovate.oauth2.util.Constants;
 import com.innovate.user.user.model.User;
 import com.innovate.user.user.service.IUserService;
+import com.innovate.util.LoggerUtils;
 
 /**
  * 认证服务 提供
@@ -65,7 +65,6 @@ public class OAuthAuthorizeController extends BaseController {
 	 */
 	@RequestMapping("authorize_code")
 	public String getAuthorizeCode(Model model, HttpServletRequest request) throws Exception {
-		LoggerUtils.info(getClass(), request.getRemoteHost() + "获取授权许可码");
 		OAuthAuthzRequest oauthRequest = new OAuthAuthzRequest(request);
 		String clientId = oauthRequest.getClientId();
 		String userName = oauthRequest.getParam(OAuth.OAUTH_USERNAME);
@@ -255,7 +254,7 @@ public class OAuthAuthorizeController extends BaseController {
 			return new ResponseEntity(json, HttpStatus.OK);
 
 		} catch (OAuthProblemException e) {
-			LoggerUtils.error(getClass(), e);
+			LoggerUtils.error(this.getClass(), e.getMessage());
 			/**
 			 * 3、检查是否设置了错误码
 			 */

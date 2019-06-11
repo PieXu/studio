@@ -62,7 +62,7 @@ public class PageTag<E> extends BodyTagSupport {
 	        builder.append("<a class=\"pageClassDisable\">").append("  [下一页]  ").append("</a>");  
 	        builder.append("<a class=\"pageClassDisable\">").append("  [尾页]  ").append("</a>");  
 	    }  
-	    builder.append("<span class=\"pageSpan\">共").append(page.getPages()).append("页/").append(page.getTotal()).append("条 </span>  ");  
+	    builder.append("<span class=\"pageSpan\">每页").append(page.getPageSize()).append("条  共").append(page.getPages()).append("页/").append(page.getTotal()).append("条 </span>  ");  
 	    builder.append("<span class=\"pageSpan\">第 <input type='text' id=\"_pageNum\" name=\"_pageNum\" ");  
 	    if ("0".equals(page.getPageNum())) {builder.append("disabled=\"disabled\"");  
 	    }  

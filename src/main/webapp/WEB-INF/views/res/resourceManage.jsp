@@ -3,8 +3,7 @@
 <%@taglib prefix="page" uri="http://com.innovate.page.tld" %>
 <link rel="stylesheet" href="lib/jquery-treetable-3.2.0/css/jquery.treetable.css" type="text/css">
 <link rel="stylesheet" href="lib/jquery-treetable-3.2.0/css/jquery.treetable.theme.default.css" type="text/css">
-		<article class="cl pd-5 pl-50">
-			<table class="table table-border table-bordered table-bg table-hover table-sort" id="example-tabletree">
+			<table class="table table-border table-bordered table-bg table-hover table-sort  mt-10" id="example-tabletree">
 			<thead>
 				<tr class="text-l">
 					<th>名称</th>
@@ -12,14 +11,15 @@
 					<th width="70">类型</th>
 					<th width="150">链接</th>
 					<th >操作权限</th>
+					<th width="60" class="text-c">图标</th>
 					<th width="150">操作</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr class="text-l" data-tt-id="_0">
-					<td colspan="5">菜单管理</td>
+					<td colspan="6">菜单管理</td>
 					<td>
-						<a style="text-decoration:none" class="ml-5" onClick="res_add('')" href="javascript:;" title="编辑">[添加下级]</a>
+						<a style="text-decoration:none" class="ml-6" onClick="res_add('')" href="javascript:;" title="编辑">[添加下级]</a>
 					</td>
 				</tr>
 				<c:if test="${!empty treeList }">
@@ -37,6 +37,7 @@
 						    <td><page:idToName dicId="${res.menuType }"/></td>
 						    <td>${res.link }</td>
 						    <td>${res.resOpt }</td>
+						    <td  class="text-c"><c:if test="${!empty res.classStyle }"><i class="Hui-iconfont  ${res.classStyle }" style="font-size:24px"></i></c:if></td>
 						    <td style="font-size: 14px">
 						    	<a style="text-decoration:none" class="ml-6" onClick="res_del('${res.id}',this)" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>
 							    <a style="text-decoration:none" class="ml-5" onClick="res_add('${res.id}')" href="javascript:;" title="添加下级菜单"><i class="Hui-iconfont">&#xe610;</i></a>
@@ -52,7 +53,6 @@
 				</c:if>
 			</tbody>
 		</table>
-	</article>
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="lib/jquery-treetable-3.2.0/jquery.treetable.js"></script> 
 <script type="text/javascript">
@@ -179,8 +179,8 @@ function delObj(id,obj){
 function setResOpt(id){
 	var index = layer.open({
 		type: 2,
-		title: "设置角色",
-		area: ['600px', '480px'],
+		title: "设置操作",
+		area: ['800px', '520px'],
 		content: "res/editResOpt.do?resId="+id,
 		btn: ['保存', '关闭']
 		,yes: function(){

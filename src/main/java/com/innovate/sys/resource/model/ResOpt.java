@@ -11,6 +11,9 @@ public class ResOpt extends BaseModel {
 
 	private String resId;
 	private String optId;
+	private String width;
+	private String height;
+	private String url;
 
 	public String getResId() {
 		return resId;
@@ -26,6 +29,30 @@ public class ResOpt extends BaseModel {
 
 	public void setOptId(String optId) {
 		this.optId = optId;
+	}
+
+	public String getWidth() {
+		return width;
+	}
+
+	public void setWidth(String width) {
+		this.width = width;
+	}
+
+	public String getHeight() {
+		return height;
+	}
+
+	public void setHeight(String height) {
+		this.height = height;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }

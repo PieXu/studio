@@ -4,6 +4,7 @@
 <html>
 <head>
  <base href="${rc.contextPath}/">
+ <script type="text/javascript" src="${rc.contextPath}/lib/My97DatePicker/4.8/WdatePicker.js"></script>
  <tiles:insertAttribute name="meta" />
  <title>管理平台</title>
 </head>

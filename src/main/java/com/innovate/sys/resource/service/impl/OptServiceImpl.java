@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.Page;
 import com.innovate.sys.resource.dao.OptDao;
 import com.innovate.sys.resource.model.Opt;
 import com.innovate.sys.resource.service.IOptService;
@@ -25,8 +26,8 @@ public class OptServiceImpl implements IOptService{
 	private OptDao optDao;
 
 	@Override
-	public List<Opt> getAllOpt() {
-		return optDao.getAllOpt();
+	public Page<Opt> getAllOpt(Opt opt) {
+		return optDao.getAllOpt(opt);
 	}
 
 	@Override
@@ -54,7 +55,7 @@ public class OptServiceImpl implements IOptService{
 
 	@Override
 	public int checkDelete(String[] optIds) {
-		if(ArrayUtils.isEmpty(optIds)){
+		if(!ArrayUtils.isEmpty(optIds)){
 			return optDao.getCountByOptId(optIds);
 		}
 		return 0;

@@ -2,6 +2,9 @@ package com.innovate.sys.resource.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -41,7 +44,7 @@ public class ResOptServiceImpl implements IResOptService{
 	}
 
 	@Override
-	public void saveResOpt(String resId, String[] optIds) {
+	public void saveResOpt(String resId, String[] optIds,HttpServletRequest request) {
 		if(StringUtils.isNotBlank(resId)){
 			resOptDao.deleteOptByResId(resId);
 			if(ArrayUtils.isNotEmpty(optIds)){
@@ -55,10 +58,12 @@ public class ResOptServiceImpl implements IResOptService{
 					resOpt.setResId(resId);
 					resOpt.setOptId( opt.getId());
 					optNames.append("[").append(opt.getName()).append("]");
+					resOpt.setWidth(request.getParameter(opt.getId()+"_width"));
+					resOpt.setHeight(request.getParameter(opt.getId()+"_height"));
+					resOpt.setUrl(request.getParameter(opt.getId()+"_url"));
 					resOptDao.saveResOpt(resOpt);
 				}
-				
-				//更新res
+				//更新res 显示名称
 				Resource res = new Resource();
 				res.setId(resId);
 				res.setResOpt(optNames.toString());
@@ -72,6 +77,15 @@ public class ResOptServiceImpl implements IResOptService{
 	public List<Opt> getOptByResId(String resId) {
 		if(StringUtils.isNotBlank(resId)){
 			return resOptDao.getOptByResId(resId);
+		}
+		return null;
+	}
+
+	@Override
+	public List<Map<String, Object>> getResOptByResId(String resId) {
+		if(StringUtils.isNotBlank(resId))
+		{
+			return resOptDao.getByResId(resId);
 		}
 		return null;
 	}

@@ -2,9 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://com.innovate.page.tld" prefix="page"%>
-	<article class="cl pd-20">
-		<div class="mt-10">
-			<table class="table table-border table-bordered table-bg table-hover table-sort">
+			<table class="table table-border table-bordered table-bg table-hover table-sort mt-10">
 				<thead>
 					<tr class="text-c">
 						<th width="50">序号</th>
@@ -32,8 +30,6 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		</div>
-	</article>
 <script type="text/javascript">
 /**
  * 踢出

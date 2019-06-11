@@ -125,15 +125,13 @@
                 id: '#filePicker-2',
                 label: '点击选择图片'
             },
-            formData: {
-                uid: 123
-            },
             dnd: '#dndArea',
             paste: '#uploader',
             swf: 'lib/webuploader/0.1.5/Uploader.swf',
             chunked: false,
             chunkSize: 512 * 1024,
-            server: 'upload/file/uploadImages.do',
+            threads :3,
+            server: "http://127.0.0.1:8090/file_server/upload",//'upload/file/uploadImages.do',
             // runtimeOrder: 'flash',
             accept: {
                  title: '选择图片',
@@ -189,7 +187,6 @@
         });
         // 文件上传成功，给item添加成功class, 用样式标记上传成功。
 		uploader.on( 'uploadSuccess', function( file , fileId ) {
-			//alert(fileId);
 			$("#form-admin-add").append("<input type='hidden' name='fileId' value='"+fileId+"'/>")
 			$( '#'+file.id ).addClass('upload-state-success').find(".state").text("已上传");
 		});
@@ -522,7 +519,37 @@
 
             }
         });
-
+        
+        uploader.onUpload = function( objectId,operator,authcode,fileIds) {
+        	layer = parent.layer === undefined ? layui.layer : parent.layer,
+    		$.ajax({
+			   type: "POST",
+			   url: "http://127.0.0.1:8090/file_server/preUpload",
+			   data: {authcode:authcode,fileIds:fileIds,objectId:objectId},//先验证
+			   success: function(data){
+				   if( data.errorCode == "0"){
+					  var grantUser = data.grantUser;
+					  if(grantUser){
+					    var obj = new Object();
+					    obj.objectId = objectId;
+					    obj.grantUser = grantUser;
+			            obj.operator = operator;
+					    uploader.options.formData=obj;
+					    uploader.upload();
+					    uploader.on('uploadFinished', function() {
+							parent.$('#btn-refresh').click();
+							layer.closeAll();
+					    });
+					  }else{
+						  layer.msg("错误代码："+data.errorCode+"<br/>错误信息："+data.errorMsg);
+					  }
+				   }else{
+					   layer.msg("错误代码："+data.errorCode+"<br/>错误信息："+data.errorMsg);
+				   }
+			   }
+			});
+        };
+        
         uploader.onError = function( code ) {
         	var msg;
             switch (code){

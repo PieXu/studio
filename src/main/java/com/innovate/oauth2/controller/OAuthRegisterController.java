@@ -58,7 +58,7 @@ public class OAuthRegisterController extends BaseController {
 		//页面需要的数据字典
 		model.addAttribute("dicList", dicUtil.getDicList(Constants.GRANT_TYPE_DIC));
 		model.addAttribute("client", client);
-		return "oauth.oauthRegList";
+		return "oauth/oauthRegList";
 	} 
 	
 	/**

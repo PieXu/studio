@@ -29,7 +29,7 @@ import com.innovate.sys.file.dao.FileDao;
 import com.innovate.sys.file.model.UploadFile;
 import com.innovate.sys.file.service.IFileService;
 import com.innovate.util.CommonCons;
-import com.innovate.util.DateUtil;
+import com.innovate.util.DateUtils;
 import com.innovate.util.IdUtil;
 import com.innovate.util.SystemPropertiesUtil;
 
@@ -230,7 +230,7 @@ public class FileServiceImpl implements IFileService {
 		String path = SystemPropertiesUtil.getSystemConfigProperties().getProperty(CommonCons.UPLOAD_FILEPATH_KEY)
 				+ File.separator;
 
-		path = path + DateUtil.getCustomDateString(new Date(), new StringBuilder().append("yyyy").append(File.separator)
+		path = path + DateUtils.getCustomDateString(new Date(), new StringBuilder().append("yyyy").append(File.separator)
 				.append("MM").append(File.separator).append("dd").toString());
 		return path;
 	}

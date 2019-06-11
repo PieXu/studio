@@ -1,5 +1,6 @@
 package com.innovate.util;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -71,5 +72,21 @@ public class SessionUtils {
 		}
 		return "";
 	}
-
+	
+	/**
+	 * 判断是否是超级用户
+	* <p>Title: checkIsSuperUser</p>
+	* <p>Description: </p>
+	* @return
+	 */
+	public static boolean checkIsSuperUser()
+	{
+		Object sessionAttribute = SessionUtils.getSessionAttribute(CommonCons.SESSION_USER_KEY);
+		if(null!=sessionAttribute){
+			User user = (User) sessionAttribute;
+			String isSuperUser = user.getIsSuperUser();
+			return StringUtils.isNotBlank(isSuperUser) && CommonCons.Y_N_ENUM.Y.toString().equals(isSuperUser);
+		}
+		return false;
+	}
 }

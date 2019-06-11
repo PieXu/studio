@@ -1,7 +1,5 @@
 package com.innovate.user.msg.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.innovate.basic.base.BaseController;
-import com.innovate.sys.dic.model.Dic;
 import com.innovate.user.msg.model.Msg;
 import com.innovate.user.msg.service.IMsgService;
 import com.innovate.util.CommonCons;
-import com.innovate.work.product.model.Bearing;
 
 /**
  * 站内消息列表

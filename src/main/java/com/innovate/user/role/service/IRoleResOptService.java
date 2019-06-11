@@ -1,9 +1,9 @@
 package com.innovate.user.role.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.innovate.basic.base.IBaseService;
-import com.innovate.sys.resource.model.Opt;
 import com.innovate.user.role.model.RoleResOpt;
 
 /**
@@ -11,7 +11,7 @@ import com.innovate.user.role.model.RoleResOpt;
  * @author IvanHsu
  * @2018年3月30日 下午3:21:59
  */
-public interface IRoleResOptService extends IBaseService{
+public interface IRoleResOptService extends IBaseService<RoleResOpt>{
 
 	/**
 	 * 保存授权设置的信息
@@ -33,7 +33,7 @@ public interface IRoleResOptService extends IBaseService{
 	 * @param roleIdList
 	 * @return
 	 */
-	public List<Opt> getOptsByRes(String resId);
+	public List<Map<String,Object>> getOptsByRes(String resId);
 	
 	/**
 	 * 获取角色内授权的操作的列表
@@ -41,6 +41,6 @@ public interface IRoleResOptService extends IBaseService{
 	 * @param roleIdList
 	 * @return
 	 */
-	public List<Opt> getOptsByResRole(String resId, List<String> roleIdList);
+	public List<Map<String,Object>> getOptsByResRole(String resId, List<String> roleIdList);
 
 }

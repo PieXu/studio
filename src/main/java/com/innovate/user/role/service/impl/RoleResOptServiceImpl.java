@@ -1,12 +1,12 @@
 package com.innovate.user.role.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.innovate.sys.resource.model.Opt;
 import com.innovate.user.role.dao.RoleResOptDao;
 import com.innovate.user.role.model.RoleResOpt;
 import com.innovate.user.role.service.IRoleResOptService;
@@ -60,7 +60,7 @@ public class RoleResOptServiceImpl implements IRoleResOptService{
 	 * roleIdList
 	 */
 	@Override
-	public List<Opt> getOptsByResRole(String resId, List<String> roleIdList) {
+	public List<Map<String,Object>> getOptsByResRole(String resId, List<String> roleIdList) {
 		if(StringUtils.isNotBlank(resId) && null!=roleIdList && roleIdList.size()>0){
 			return roleResOptDao.getOptsByResRole(resId,roleIdList);
 		}
@@ -68,7 +68,7 @@ public class RoleResOptServiceImpl implements IRoleResOptService{
 	}
 
 	@Override
-	public List<Opt> getOptsByRes(String resId) {
+	public List<Map<String,Object>> getOptsByRes(String resId) {
 		if(StringUtils.isNotBlank(resId)){
 			return roleResOptDao.getOptsByRes(resId);
 		}
