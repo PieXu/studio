@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE  mapper  PUBLIC  "-//mybatis.org//DTD  Mapper  3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.innovate.plat.dao.RequestProcessDao">
+
+	<!--条件查询 -->
+	<select id="superProcessSelect" parameterType="java.util.Map" resultType="java.util.LinkedHashMap">
+		${params.sqlBody} ${params.sqlWhere} 
+	</select>
+	<!-- 主键查询 -->
+	<select id="getObject" parameterType="java.util.Map" resultType="java.util.LinkedHashMap">
+		${params.sqlBody} ${params.sqlWhere} 
+	</select>
+	
+	<!-- 更新对象 -->
+	<update id="updateObject">${sqlVal}</update>
+	
+	<!-- 保存 -->
+	<insert id="saveObject">${sqlVal}</insert>
+	
+	<!-- 逻辑删除，处置删除状态 -->
+	<update id="deleteObject">${sqlVal}</update>
+	
+
+</mapper>
