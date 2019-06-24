@@ -43,14 +43,14 @@
         <property name="defaultLocale" value="zh_CN"/>  
     </bean>  
   
-    <!-- 支持返回json(避免IE在ajax请求时，返回json出现下载 ) -->  
+    <!-- 支持返回json(避免IE在ajax请求时，返回json出现下载 ) 5.0版本以前需要配置，以后自动配置不需要添加
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
         <property name="messageConverters">  
             <list>  
                 <ref bean="mappingJacksonHttpMessageConverter"/>  
             </list>  
         </property>  
-    </bean>  
+    </bean>   -->  
     <bean id="mappingJacksonHttpMessageConverter"  
           class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
         <property name="supportedMediaTypes">  
@@ -117,8 +117,9 @@
    <!--  <aop:config>  
        
     </aop:config>   -->
-    <!-- 系统操作日志配置  end --> 
-    
-    <mvc:default-servlet-handler/>
+    <!-- 系统操作日志配置  end -->
+     <!-- <bean class="com.easysoft.logs.aspect.AuditLogAspect" /> -->
+    <!-- web.xml中配置静态的文件的访问， 不需要登录认证拦截的 -->
+   <mvc:default-servlet-handler/>
  	
 </beans>  

@@ -9,25 +9,37 @@
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spring.version>4.3.12.RELEASE</spring.version>
-	<jackson.version>2.8.10</jackson.version>
+    <spring.version>5.1.6.RELEASE</spring.version>
+	<jackson.version>2.9.8</jackson.version>
 	<shiro.version>1.3.2</shiro.version>
 	<activiti.version>6.0.0</activiti.version>
-	
+	<log4j.version>2.11.1</log4j.version>
   </properties>
 
   <dependencies>
+  <dependency>
+  	<groupId>com.easysoft.logs</groupId>
+  	<artifactId>logs-client-starter</artifactId>
+  	<version>version_0.0.1</version>
+  </dependency>
     	<!-- log4j -->
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.16</version>
-		</dependency>	
-      <dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.6</version>
-		</dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-web</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
 		<!-- spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -153,7 +165,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.2.40</version>
+			<version>1.2.56</version>
 		</dependency>
 
 		<dependency>
@@ -173,6 +185,7 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
+		
 		
 		<dependency>
 		    <groupId>org.apache.tiles</groupId>
@@ -311,7 +324,7 @@
 		    <version>2.10.4</version>
 		</dependency>
 
-		<!-- activiti begin 工作流引擎以及集成spring的先关jar包管理-->
+		<!-- activiti begin 工作流引擎以及集成spring的先关jar包管理
 		<dependency>
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-engine</artifactId>
@@ -342,7 +355,7 @@
 			<artifactId>activiti-process-validation</artifactId>
 			<version>${activiti.version}</version>
 		</dependency>
-		<!-- activiti end -->
+		activiti end -->
 		
 		<dependency>
 		    <groupId>com.google.guava</groupId>

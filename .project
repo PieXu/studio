@@ -4,6 +4,7 @@
 	<comment></comment>
 	<projects>
 		<project>utils</project>
+		<project>log-client</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

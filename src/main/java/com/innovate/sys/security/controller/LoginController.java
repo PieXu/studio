@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.easysoft.logs.model.AuditUser;
 import com.innovate.basic.annotation.SystemVisitLog;
 import com.innovate.basic.exception.AccountExisitException;
 import com.innovate.core.util.MessageUtils;
@@ -236,6 +237,7 @@ public class LoginController {
 	         }
 	         SessionUtils.setSessionAttribute(CommonCons.SESSION_USER_KEY,userLogin);
 	         SessionUtils.setSessionAttribute(CommonCons.SESSION_USER_LOGIN_NAME_KEY,userLogin.getLoginName());
+	         SessionUtils.setSessionAttribute( AuditUser.AUDIT_USER_KEY,new AuditUser(userLogin.getId(),userLogin.getUserName()));
 		}
 	}
 	

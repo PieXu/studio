@@ -17,6 +17,7 @@
        <property name="locations">  
            <list>  
                <value>classpath*:db/db.properties</value>  
+               <value>classpath*:config/system_config.properties</value>  
                <value>classpath*:cache/redis.properties</value>  
            </list>  
        </property>  

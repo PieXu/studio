@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSONObject;
+import com.easysoft.logs.annotation.AuditMonitor;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.innovate.basic.base.BaseController;
@@ -53,6 +54,7 @@ public class GoodsController extends BaseController{
 	 * 2017年6月20日
 	 */
 	@RequestMapping(value="goods/listGoods")
+	@AuditMonitor
 	public String listGoods(HttpServletRequest request,Model model,Goods goods,Integer pageNum)
 	{
 		pageNum = null == pageNum || pageNum == 0 ? 1 : pageNum;

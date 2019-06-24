@@ -111,13 +111,13 @@ public class CodeGenSetController extends BaseController{
 				setPro.setProperty(CodeGenUtils.GEN_WORKSPACE_PATH, codeGenSetting.getWorkPath());
 				
 				// 降配置信息协会到属性文件中
-				String workSpace = codeGenSetting.getWorkPath();
+//				String workSpace = codeGenSe?tting.getWorkPath();
 				OutputStream out = null;
-				if(StringUtils.isNotBlank(workSpace)){
-					String fileLoginPath = workSpace + File.separator+ "resources" + File.separator+ "config" + File.separator + "gen_config.properties";
+				/*if(StringUtils.isNotBlank(workSpace)){
+					String fileLoginPath = filePath + File.separator+ "resources" + File.separator+ "config" + File.separator + "gen_config.properties";
 					out = new FileOutputStream(fileLoginPath);
 					setPro.store(out, "更新保存配到开发工程文件");
-				}
+				}*/
 				out = new FileOutputStream(filePath);
 				setPro.store(out, "更新保存配置的信息");
 				out.flush();
